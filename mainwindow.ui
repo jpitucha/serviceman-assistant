@@ -40,51 +40,6 @@
       </item>
      </layout>
     </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="clientsButton">
-        <property name="text">
-         <string>Klienci</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="devicesButton">
-        <property name="text">
-         <string>Urządzenia</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="damagesButton">
-        <property name="text">
-         <string>Usterki</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="techniciansButton">
-        <property name="text">
-         <string>Serwisanci</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -105,12 +60,19 @@
    <addaction name="menuFile"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="movable">
+    <bool>false</bool>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionClients"/>
+   <addaction name="actionDevices"/>
+   <addaction name="actionDamages"/>
+   <addaction name="actionTechnicians"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionExit">
@@ -118,8 +80,46 @@
     <string>Wyjdź</string>
    </property>
   </action>
+  <action name="actionClients">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/clients.png</normaloff>:/icons/clients.png</iconset>
+   </property>
+   <property name="text">
+    <string>Klienci</string>
+   </property>
+  </action>
+  <action name="actionDevices">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/devices.png</normaloff>:/icons/devices.png</iconset>
+   </property>
+   <property name="text">
+    <string>Urządzenia</string>
+   </property>
+  </action>
+  <action name="actionDamages">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/damages.png</normaloff>:/icons/damages.png</iconset>
+   </property>
+   <property name="text">
+    <string>Usterki</string>
+   </property>
+  </action>
+  <action name="actionTechnicians">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/technicians.png</normaloff>:/icons/technicians.png</iconset>
+   </property>
+   <property name="text">
+    <string>Serwisanci</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
