@@ -5,12 +5,14 @@
 #include "devicesdialog.h"
 #include "damagesdialog.h"
 #include "techniciansdialog.h"
+#include "devicesdatabasedialog.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(ui->actionDatabase, SIGNAL(triggered()), new DevicesDatabaseDialog, SLOT(open()));
     connect(ui->actionClients, SIGNAL(triggered()), new ClientsDialog, SLOT(open()));
     connect(ui->actionDevices, SIGNAL(triggered()), new DevicesDialog, SLOT(open()));
     connect(ui->actionDamages, SIGNAL(triggered()), new DamagesDialog, SLOT(open()));

@@ -69,6 +69,7 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionDatabase"/>
    <addaction name="actionClients"/>
    <addaction name="actionDevices"/>
    <addaction name="actionDamages"/>
@@ -114,6 +115,15 @@
    </property>
    <property name="text">
     <string>Serwisanci</string>
+   </property>
+  </action>
+  <action name="actionDatabase">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/database.png</normaloff>:/icons/database.png</iconset>
+   </property>
+   <property name="text">
+    <string>Baza Urządzeń</string>
    </property>
   </action>
  </widget>

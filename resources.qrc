@@ -4,5 +4,6 @@
         <file>icons/damages.png</file>
         <file>icons/devices.png</file>
         <file>icons/technicians.png</file>
+        <file>icons/database.png</file>
     </qresource>
 </RCC>
