@@ -17,6 +17,13 @@ public:
     static QStringList data;
     ~ClientsDialog();
 
+private slots:
+    void on_addButton_clicked();
+
+    void on_editButton_clicked();
+
+    void on_deleteButton_clicked();
+
 private:
     Ui::ClientsDialog *ui;
     QStringListModel *model;
