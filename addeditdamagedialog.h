@@ -12,7 +12,8 @@ class AddEditDamageDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddEditDamageDialog(QWidget *parent = nullptr);
+    explicit AddEditDamageDialog(QString action, QString damage = "", QWidget *parent = nullptr);
+    QString getDamage();
     ~AddEditDamageDialog();
 
 private:
