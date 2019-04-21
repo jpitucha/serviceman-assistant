@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        addeditclientdialog.cpp \
         clientsdialog.cpp \
         damagesdialog.cpp \
         devicesdialog.cpp \
@@ -33,6 +34,7 @@ SOURCES += \
         techniciansdialog.cpp
 
 HEADERS += \
+        addeditclientdialog.h \
         clientsdialog.h \
         damagesdialog.h \
         devicesdialog.h \
@@ -40,6 +42,7 @@ HEADERS += \
         techniciansdialog.h
 
 FORMS += \
+        addeditclientdialog.ui \
         clientsdialog.ui \
         damagesdialog.ui \
         devicesdialog.ui \

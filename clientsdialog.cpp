@@ -3,6 +3,8 @@
 
 #include <QStringListModel>
 #include <QMessageBox>
+#include "addeditclientdialog.h"
+#include "QDebug"
 
 QStringList ClientsDialog::data;
 
@@ -29,7 +31,15 @@ ClientsDialog::~ClientsDialog()
 
 void ClientsDialog::on_addButton_clicked()
 {
-
+    AddEditClientDialog *dialog = new AddEditClientDialog("Dodaj");
+    if (dialog->exec() == QDialog::Accepted) {
+        if (!ClientsDialog::data.contains(dialog->getClient())) {
+            ClientsDialog::data.append(dialog->getClient());
+            model->setStringList(ClientsDialog::data);
+        } else {
+            QMessageBox::critical(this, "Błąd", "Taki klient już istnieje");
+        }
+    }
 }
 
 void ClientsDialog::on_editButton_clicked()
@@ -42,9 +52,9 @@ void ClientsDialog::on_deleteButton_clicked()
     if (model->rowCount() > 0) {
         if (QMessageBox::warning(this, "Ostrzeżenie", "Na pewno?", QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes) {
             model->removeRow(ui->listView->currentIndex().row());
+            ClientsDialog::data = model->stringList();
         }
     } else {
         QMessageBox::critical(this, "Błąd", "Nic już tu nie ma!");
     }
-    ClientsDialog::data = model->stringList();
 }
