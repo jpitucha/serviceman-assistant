@@ -1,15 +1,13 @@
 #include "addeditclientdialog.h"
 #include "ui_addeditclientdialog.h"
 
-#include <QDebug>
-
-AddEditClientDialog::AddEditClientDialog(QString text, QString client, QWidget *parent) :
+AddEditClientDialog::AddEditClientDialog(QString action, QString client, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddEditClientDialog)
 {
     ui->setupUi(this);
-    setWindowTitle(text);
-    ui->label->setText(text + " " + ui->label->text());
+    setWindowTitle(action);
+    ui->label->setText(action + " " + ui->label->text());
     ui->lineEdit->setText(client);
 }
 

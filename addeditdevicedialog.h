@@ -12,7 +12,8 @@ class AddEditDeviceDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddEditDeviceDialog(QWidget *parent = nullptr);
+    explicit AddEditDeviceDialog(QString action, QString device = "", QWidget *parent = nullptr);
+    QString getDevice();
     ~AddEditDeviceDialog();
 
 private:
