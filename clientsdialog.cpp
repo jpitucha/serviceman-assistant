@@ -67,8 +67,8 @@ void ClientsDialog::on_deleteButton_clicked()
 {
     if (model->rowCount() > 0) {
         if (QMessageBox::warning(this, "Ostrzeżenie", "Na pewno?", QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes) {
-            model->removeRow(ui->listView->currentIndex().row());
-            ClientsDialog::data = model->stringList();
+            ClientsDialog::data.removeAt(ui->listView->currentIndex().row());
+            model->setStringList(ClientsDialog::data);
         }
     } else {
         QMessageBox::critical(this, "Błąd", "Nic już tu nie ma!");
