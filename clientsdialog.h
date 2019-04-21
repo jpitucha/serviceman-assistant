@@ -2,6 +2,7 @@
 #define CLIENTSDIALOG_H
 
 #include <QDialog>
+#include <QStringListModel>
 
 namespace Ui {
 class ClientsDialog;
@@ -13,10 +14,12 @@ class ClientsDialog : public QDialog
 
 public:
     explicit ClientsDialog(QWidget *parent = nullptr);
+    static QStringList data;
     ~ClientsDialog();
 
 private:
     Ui::ClientsDialog *ui;
+    QStringListModel *model;
 };
 
 #endif // CLIENTSDIALOG_H
