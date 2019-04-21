@@ -33,18 +33,34 @@ void ClientsDialog::on_addButton_clicked()
 {
     AddEditClientDialog *dialog = new AddEditClientDialog("Dodaj");
     if (dialog->exec() == QDialog::Accepted) {
-        if (!ClientsDialog::data.contains(dialog->getClient())) {
-            ClientsDialog::data.append(dialog->getClient());
-            model->setStringList(ClientsDialog::data);
+        if (dialog->getClient() != "") {
+            if (!ClientsDialog::data.contains(dialog->getClient())) {
+                ClientsDialog::data.append(dialog->getClient());
+                model->setStringList(ClientsDialog::data);
+            } else {
+                QMessageBox::critical(this, "Błąd", "Taki klient już istnieje");
+            }
         } else {
-            QMessageBox::critical(this, "Błąd", "Taki klient już istnieje");
+            QMessageBox::critical(this, "Błąd", "To pole nie może być puste");
         }
     }
 }
 
 void ClientsDialog::on_editButton_clicked()
 {
-
+    AddEditClientDialog *dialog = new AddEditClientDialog("Edytuj", model->stringList().at(ui->listView->currentIndex().row()));
+    if (dialog->exec() == QDialog::Accepted) {
+        if (dialog->getClient() != "") {
+            if (!ClientsDialog::data.contains(dialog->getClient())) {
+                ClientsDialog::data.replace(ui->listView->currentIndex().row(), dialog->getClient());
+                model->setStringList(ClientsDialog::data);
+            } else {
+                QMessageBox::critical(this, "Błąd", "Taki klient już istnieje");
+            }
+        } else {
+            QMessageBox::critical(this, "Błąd", "To pole nie może być puste");
+        }
+    }
 }
 
 void ClientsDialog::on_deleteButton_clicked()
