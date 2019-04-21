@@ -26,6 +26,7 @@ CONFIG += c++11
 
 SOURCES += \
         addeditclientdialog.cpp \
+        addeditdamagedialog.cpp \
         addeditdevicedialog.cpp \
         clientsdialog.cpp \
         damagesdialog.cpp \
@@ -37,6 +38,7 @@ SOURCES += \
 
 HEADERS += \
         addeditclientdialog.h \
+        addeditdamagedialog.h \
         addeditdevicedialog.h \
         clientsdialog.h \
         damagesdialog.h \
@@ -47,6 +49,7 @@ HEADERS += \
 
 FORMS += \
         addeditclientdialog.ui \
+        addeditdamagedialog.ui \
         addeditdevicedialog.ui \
         clientsdialog.ui \
         damagesdialog.ui \
