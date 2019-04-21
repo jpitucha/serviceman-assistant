@@ -25,14 +25,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        clientsdialog.cpp \
+        damagesdialog.cpp \
+        devicesdialog.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        techniciansdialog.cpp
 
 HEADERS += \
-        mainwindow.h
+        clientsdialog.h \
+        damagesdialog.h \
+        devicesdialog.h \
+        mainwindow.h \
+        techniciansdialog.h
 
 FORMS += \
-        mainwindow.ui
+        clientsdialog.ui \
+        damagesdialog.ui \
+        devicesdialog.ui \
+        mainwindow.ui \
+        techniciansdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
