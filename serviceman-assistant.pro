@@ -28,6 +28,7 @@ SOURCES += \
         addeditclientdialog.cpp \
         addeditdamagedialog.cpp \
         addeditdevicedialog.cpp \
+        addedittechniciandialog.cpp \
         clientsdialog.cpp \
         damagesdialog.cpp \
         devicesdatabasedialog.cpp \
@@ -40,6 +41,7 @@ HEADERS += \
         addeditclientdialog.h \
         addeditdamagedialog.h \
         addeditdevicedialog.h \
+        addedittechniciandialog.h \
         clientsdialog.h \
         damagesdialog.h \
         devicesdatabasedialog.h \
@@ -51,6 +53,7 @@ FORMS += \
         addeditclientdialog.ui \
         addeditdamagedialog.ui \
         addeditdevicedialog.ui \
+        addedittechniciandialog.ui \
         clientsdialog.ui \
         damagesdialog.ui \
         devicesdatabasedialog.ui \
