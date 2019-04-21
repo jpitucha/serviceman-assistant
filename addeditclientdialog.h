@@ -12,7 +12,7 @@ class AddEditClientDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddEditClientDialog(QString text, QString client = "", QWidget *parent = nullptr);
+    explicit AddEditClientDialog(QString action, QString client = "", QWidget *parent = nullptr);
     QString getClient();
     ~AddEditClientDialog();
 
