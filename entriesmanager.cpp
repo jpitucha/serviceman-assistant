@@ -61,8 +61,6 @@ void EntriesManager::on_editButton_clicked()
 
 void EntriesManager::on_deleteButton_clicked()
 {
-#define lastIndex model->rowCount() - 1
-
     QModelIndex *tmpIndex = new QModelIndex(ui->listView->currentIndex());
     if (model->rowCount() > 0) {
         if (QMessageBox::warning(this, "Ostrzeżenie", "Na pewno?", QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes) {
