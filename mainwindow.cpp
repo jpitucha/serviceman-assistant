@@ -7,6 +7,8 @@
 #include "techniciansdialog.h"
 #include "devicesdatabasedialog.h"
 
+#include "entriesmanager.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -16,10 +18,17 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionClients, SIGNAL(triggered()), new ClientsDialog, SLOT(open()));
     connect(ui->actionDevices, SIGNAL(triggered()), new DevicesDialog, SLOT(open()));
     connect(ui->actionDamages, SIGNAL(triggered()), new DamagesDialog, SLOT(open()));
-    connect(ui->actionTechnicians, SIGNAL(triggered()), new TechniciansDialog, SLOT(open()));
+    connect(ui->actionTechnicians, SIGNAL(triggered()), this, SLOT(openTechniciansDialog()));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::openTechniciansDialog() {
+    QStringList list;
+    list << "Serwisant 1" << "Serwisant 22" << "Serwisant 3";
+    EntriesManager *em = new EntriesManager("Serwisanci", list);
+    em->open();
 }

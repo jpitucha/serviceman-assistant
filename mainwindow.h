@@ -15,6 +15,9 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void openTechniciansDialog();
+
 private:
     Ui::MainWindow *ui;
 };
