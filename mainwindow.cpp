@@ -15,11 +15,14 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->actionDatabase, SIGNAL(triggered()), new DevicesDatabaseDialog, SLOT(open()));
-    connect(ui->actionClients, SIGNAL(triggered()), new ClientsDialog, SLOT(open()));
-    connect(ui->actionDevices, SIGNAL(triggered()), new DevicesDialog, SLOT(open()));
-    connect(ui->actionDamages, SIGNAL(triggered()), new DamagesDialog, SLOT(open()));
+    connect(ui->actionClients, SIGNAL(triggered()), this, SLOT(openClientsDialog()));
+    connect(ui->actionDevices, SIGNAL(triggered()), this, SLOT(openDevicesDialog()));
+    connect(ui->actionDamages, SIGNAL(triggered()), this, SLOT(openDamagesDialog()));
     connect(ui->actionTechnicians, SIGNAL(triggered()), this, SLOT(openTechniciansDialog()));
-    list << "Serwisant 1" << "Serwisant 22" << "Serwisant 3";
+    clientsList << "Klient 1" << "Klient 2" << "Klient 3";
+    devicesList << "Urządzenie 1" << "Urządzenie 2" << "Urządzenie 3";
+    damagesList << "Usterka 1" << "Usterka 2" << "Usterka 3";
+    techniciansList << "Serwisant 1" << "Serwisant 2" << "Serwisant 3";
 }
 
 MainWindow::~MainWindow()
@@ -27,7 +30,22 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::openClientsDialog() {
+    EntriesManager *em = new EntriesManager("Serwisanci", clientsList);
+    em->open();
+}
+
+void MainWindow::openDevicesDialog() {
+    EntriesManager *em = new EntriesManager("Serwisanci", devicesList);
+    em->open();
+}
+
+void MainWindow::openDamagesDialog() {
+    EntriesManager *em = new EntriesManager("Serwisanci", damagesList);
+    em->open();
+}
+
 void MainWindow::openTechniciansDialog() {
-    EntriesManager *em = new EntriesManager("Serwisanci", list);
+    EntriesManager *em = new EntriesManager("Serwisanci", techniciansList);
     em->open();
 }

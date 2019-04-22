@@ -3,8 +3,6 @@
 #include "addedititemdialog.h"
 #include <QMessageBox>
 
-#include <QDebug>
-
 EntriesManager::EntriesManager(QString windowTitle, QStringList &entries, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::EntriesManager)
@@ -17,7 +15,6 @@ EntriesManager::EntriesManager(QString windowTitle, QStringList &entries, QWidge
     ui->listView->setModel(model);
     ui->listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->listView->setCurrentIndex(model->index(0));
-    qDebug() << entries;
 }
 
 EntriesManager::~EntriesManager()
@@ -33,6 +30,7 @@ void EntriesManager::on_addButton_clicked()
             if (!data->contains(dialog->getText())) {
                 data->append(dialog->getText());
                 model->setStringList(*data);
+                ui->listView->setCurrentIndex(model->index(model->rowCount() - 1));
             } else {
                 QMessageBox::critical(this, "Błąd", "Taki wpis już istnieje");
             }
@@ -44,12 +42,14 @@ void EntriesManager::on_addButton_clicked()
 
 void EntriesManager::on_editButton_clicked()
 {
+    QModelIndex *tmpIndex = new QModelIndex(ui->listView->currentIndex());
     AddEditItemDialog *dialog = new AddEditItemDialog("Edytuj", model->stringList().at(ui->listView->currentIndex().row()));
     if (dialog->exec() == QDialog::Accepted) {
         if (dialog->getText() != "") {
             if (!data->contains(dialog->getText())) {
                 data->replace(ui->listView->currentIndex().row(), dialog->getText());
                 model->setStringList(*data);
+                ui->listView->setCurrentIndex(*tmpIndex);
             } else {
                 QMessageBox::critical(this, "Błąd", "Taki wpis już istnieje");
             }
@@ -61,10 +61,20 @@ void EntriesManager::on_editButton_clicked()
 
 void EntriesManager::on_deleteButton_clicked()
 {
+#define lastIndex model->rowCount() - 1
+
+    QModelIndex *tmpIndex = new QModelIndex(ui->listView->currentIndex());
     if (model->rowCount() > 0) {
         if (QMessageBox::warning(this, "Ostrzeżenie", "Na pewno?", QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes) {
             data->removeAt(ui->listView->currentIndex().row());
             model->setStringList(*data);
+            if (model->rowCount() > 0) {
+                if (model->rowCount() - 1 >= tmpIndex->row()) {
+                    ui->listView->setCurrentIndex(*tmpIndex);
+                } else if (tmpIndex->row() == model->rowCount()) {
+                    ui->listView->setCurrentIndex(model->index(model->rowCount() - 1));
+                }
+            }
         }
     } else {
         QMessageBox::critical(this, "Błąd", "Nic już tu nie ma!");

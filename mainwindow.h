@@ -13,10 +13,16 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
-    QStringList list;
+    QStringList clientsList;
+    QStringList devicesList;
+    QStringList damagesList;
+    QStringList techniciansList;
     ~MainWindow();
 
 private slots:
+    void openClientsDialog();
+    void openDevicesDialog();
+    void openDamagesDialog();
     void openTechniciansDialog();
 
 private:
