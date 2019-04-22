@@ -39,7 +39,7 @@ void EntriesManager::on_addButton_clicked()
     }
 }
 
-void EntriesManager::on_editButton_clicked()
+void EntriesManager::on_editButton_clicked() //check if any entries exists
 {
     QModelIndex *tmpIndex = new QModelIndex(ui->listView->currentIndex());
     AddEditItemDialog *dialog = new AddEditItemDialog("Edytuj", model->stringList().at(ui->listView->currentIndex().row()), this);

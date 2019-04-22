@@ -20,6 +20,7 @@ public:
     QStringList techniciansList;
     QStringList labels;
     QStringList devicesList;
+    bool checkIfDeviceListContainsSN();
     ~MainWindow();
 
 private slots:
