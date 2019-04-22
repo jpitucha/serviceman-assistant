@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QStandardItemModel>
 
 namespace Ui {
 class MainWindow;
@@ -14,9 +15,11 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     QStringList clientsList;
-    QStringList devicesList;
+    QStringList modelsList;
     QStringList damagesList;
     QStringList techniciansList;
+    QStringList labels;
+    QStringList devicesList;
     ~MainWindow();
 
 private slots:
@@ -24,9 +27,13 @@ private slots:
     void openDevicesDialog();
     void openDamagesDialog();
     void openTechniciansDialog();
+    void openAddDeviceDialog();
+    void openEditDeviceDialog();
+    void deleteDevice();
 
 private:
     Ui::MainWindow *ui;
+    QStandardItemModel *model;
 };
 
 #endif // MAINWINDOW_H

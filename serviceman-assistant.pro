@@ -25,17 +25,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    addeditdevicedialog.cpp \
         addedititemdialog.cpp \
         entriesmanager.cpp \
         main.cpp \
         mainwindow.cpp \
 
 HEADERS += \
+    addeditdevicedialog.h \
         addedititemdialog.h \
         entriesmanager.h \
         mainwindow.h \
 
 FORMS += \
+        addeditdevicedialog.ui \
         addedititemdialog.ui \
         entriesmanager.ui \
         mainwindow.ui

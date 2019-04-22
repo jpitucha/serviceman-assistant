@@ -40,7 +40,11 @@
        </layout>
       </item>
       <item>
-       <widget class="QTableView" name="tableView"/>
+       <widget class="QTableView" name="tableView">
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -74,8 +78,9 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionDatabase"/>
+   <addaction name="separator"/>
    <addaction name="actionClients"/>
-   <addaction name="actionDevices"/>
+   <addaction name="actionModels"/>
    <addaction name="actionDamages"/>
    <addaction name="actionTechnicians"/>
    <addaction name="separator"/>
@@ -98,13 +103,16 @@
     <string>Klienci</string>
    </property>
   </action>
-  <action name="actionDevices">
+  <action name="actionModels">
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/icons/devices.png</normaloff>:/icons/devices.png</iconset>
    </property>
    <property name="text">
-    <string>Urządzenia</string>
+    <string>Modele</string>
+   </property>
+   <property name="toolTip">
+    <string>Modele</string>
    </property>
   </action>
   <action name="actionDamages">

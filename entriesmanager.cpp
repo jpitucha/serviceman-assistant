@@ -13,7 +13,6 @@ EntriesManager::EntriesManager(QString windowTitle, QStringList &entries, QWidge
     model = new QStringListModel(this);
     model->setStringList(*data);
     ui->listView->setModel(model);
-    ui->listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->listView->setCurrentIndex(model->index(0));
 }
 
