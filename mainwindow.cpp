@@ -1,12 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "clientsdialog.h"
-#include "devicesdialog.h"
-#include "damagesdialog.h"
-#include "techniciansdialog.h"
-#include "devicesdatabasedialog.h"
-
 #include "entriesmanager.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -14,7 +8,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    connect(ui->actionDatabase, SIGNAL(triggered()), new DevicesDatabaseDialog, SLOT(open()));
     connect(ui->actionClients, SIGNAL(triggered()), this, SLOT(openClientsDialog()));
     connect(ui->actionDevices, SIGNAL(triggered()), this, SLOT(openDevicesDialog()));
     connect(ui->actionDamages, SIGNAL(triggered()), this, SLOT(openDamagesDialog()));
