@@ -24,7 +24,7 @@ EntriesManager::~EntriesManager()
 
 void EntriesManager::on_addButton_clicked()
 {
-    AddEditItemDialog *dialog = new AddEditItemDialog("Dodaj");
+    AddEditItemDialog *dialog = new AddEditItemDialog("Dodaj", "", this);
     if (dialog->exec() == QDialog::Accepted) {
         if (dialog->getText() != "") {
             if (!data->contains(dialog->getText())) {
@@ -43,7 +43,7 @@ void EntriesManager::on_addButton_clicked()
 void EntriesManager::on_editButton_clicked()
 {
     QModelIndex *tmpIndex = new QModelIndex(ui->listView->currentIndex());
-    AddEditItemDialog *dialog = new AddEditItemDialog("Edytuj", model->stringList().at(ui->listView->currentIndex().row()));
+    AddEditItemDialog *dialog = new AddEditItemDialog("Edytuj", model->stringList().at(ui->listView->currentIndex().row()), this);
     if (dialog->exec() == QDialog::Accepted) {
         if (dialog->getText() != "") {
             if (!data->contains(dialog->getText())) {

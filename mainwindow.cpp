@@ -24,21 +24,21 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::openClientsDialog() {
-    EntriesManager *em = new EntriesManager("Serwisanci", clientsList);
+    EntriesManager *em = new EntriesManager("Klienci", clientsList, this);
     em->open();
 }
 
 void MainWindow::openDevicesDialog() {
-    EntriesManager *em = new EntriesManager("Serwisanci", devicesList);
+    EntriesManager *em = new EntriesManager("Urządzenia", devicesList, this);
     em->open();
 }
 
 void MainWindow::openDamagesDialog() {
-    EntriesManager *em = new EntriesManager("Serwisanci", damagesList);
+    EntriesManager *em = new EntriesManager("Usterki", damagesList, this);
     em->open();
 }
 
 void MainWindow::openTechniciansDialog() {
-    EntriesManager *em = new EntriesManager("Serwisanci", techniciansList);
+    EntriesManager *em = new EntriesManager("Serwisanci", techniciansList, this);
     em->open();
 }

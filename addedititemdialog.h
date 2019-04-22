@@ -12,7 +12,7 @@ class AddEditItemDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddEditItemDialog(QString windowTitle, QString text = "", QWidget *parent = nullptr);
+    explicit AddEditItemDialog(QString windowTitle, QString text, QWidget *parent = nullptr);
     QString getText();
     ~AddEditItemDialog();
 
