@@ -33,6 +33,7 @@ SOURCES += \
         damagesdialog.cpp \
         devicesdatabasedialog.cpp \
         devicesdialog.cpp \
+        entriesmanager.cpp \
         main.cpp \
         mainwindow.cpp \
         techniciansdialog.cpp
@@ -46,6 +47,7 @@ HEADERS += \
         damagesdialog.h \
         devicesdatabasedialog.h \
         devicesdialog.h \
+        entriesmanager.h \
         mainwindow.h \
         techniciansdialog.h
 
@@ -58,6 +60,7 @@ FORMS += \
         damagesdialog.ui \
         devicesdatabasedialog.ui \
         devicesdialog.ui \
+        entriesmanager.ui \
         mainwindow.ui \
         techniciansdialog.ui
 
