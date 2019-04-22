@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionDevices, SIGNAL(triggered()), new DevicesDialog, SLOT(open()));
     connect(ui->actionDamages, SIGNAL(triggered()), new DamagesDialog, SLOT(open()));
     connect(ui->actionTechnicians, SIGNAL(triggered()), this, SLOT(openTechniciansDialog()));
+    list << "Serwisant 1" << "Serwisant 22" << "Serwisant 3";
 }
 
 MainWindow::~MainWindow()
@@ -27,8 +28,6 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::openTechniciansDialog() {
-    QStringList list;
-    list << "Serwisant 1" << "Serwisant 22" << "Serwisant 3";
     EntriesManager *em = new EntriesManager("Serwisanci", list);
     em->open();
 }

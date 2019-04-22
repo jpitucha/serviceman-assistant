@@ -13,8 +13,8 @@ class EntriesManager : public QDialog
     Q_OBJECT
 
 public:
-    explicit EntriesManager(QString windowTitle, QStringList entries, QWidget *parent = nullptr);
-    QStringList data;
+    explicit EntriesManager(QString windowTitle, QStringList &entries, QWidget *parent = nullptr);
+    QStringList *data;
     ~EntriesManager();
 
 private slots:
