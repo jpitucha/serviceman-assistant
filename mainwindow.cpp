@@ -85,6 +85,7 @@ void MainWindow::openEditDeviceDialog() {
                 model->setData(model->index(ui->tableView->currentIndex().row(), 0), QVariant(tmpDevice->at(0)));
                 model->setData(model->index(ui->tableView->currentIndex().row(), 1), QVariant(tmpDevice->at(1)));
                 model->setData(model->index(ui->tableView->currentIndex().row(), 2), QVariant(tmpDevice->at(2)));
+                model->dataChanged(model->index(ui->tableView->currentIndex().row(), 0), model->index(ui->tableView->currentIndex().row(), 2));
             } else {
                 QMessageBox::critical(this, "Błąd", "Taki wpis już istnieje");
             }
