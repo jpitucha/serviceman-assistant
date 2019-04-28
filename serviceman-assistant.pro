@@ -27,6 +27,7 @@ CONFIG += c++11
 SOURCES += \
     addeditdevicedialog.cpp \
         addedititemdialog.cpp \
+    databaseselectdialog.cpp \
         entriesmanager.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -34,12 +35,14 @@ SOURCES += \
 HEADERS += \
     addeditdevicedialog.h \
         addedititemdialog.h \
+    databaseselectdialog.h \
         entriesmanager.h \
         mainwindow.h \
 
 FORMS += \
         addeditdevicedialog.ui \
         addedititemdialog.ui \
+        databaseselectdialog.ui \
         entriesmanager.ui \
         mainwindow.ui
 

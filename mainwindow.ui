@@ -18,29 +18,45 @@
     <normaloff>:/icons/soldering_iron.png</normaloff>:/icons/soldering_iron.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QLineEdit" name="idInputField">
-          <property name="placeholderText">
-           <string>Wpisz lub zeskanuj numer urządzenia</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="searchButton">
-          <property name="text">
-           <string>Szukaj</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QLineEdit" name="idInputField">
+        <property name="placeholderText">
+         <string>Wpisz SN</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="searchButton">
+        <property name="text">
+         <string>Szukaj</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QListView" name="listView">
+        <property name="maximumSize">
+         <size>
+          <width>275</width>
+          <height>16777215</height>
+         </size>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QTableView" name="tableView">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="editTriggers">
          <set>QAbstractItemView::NoEditTriggers</set>
         </property>
@@ -77,8 +93,6 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionDatabase"/>
-   <addaction name="separator"/>
    <addaction name="actionClients"/>
    <addaction name="actionModels"/>
    <addaction name="actionDamages"/>
@@ -131,15 +145,6 @@
    </property>
    <property name="text">
     <string>Serwisanci</string>
-   </property>
-  </action>
-  <action name="actionDatabase">
-   <property name="icon">
-    <iconset resource="resources.qrc">
-     <normaloff>:/icons/database.png</normaloff>:/icons/database.png</iconset>
-   </property>
-   <property name="text">
-    <string>Baza Urządzeń</string>
    </property>
   </action>
   <action name="actionAdd">
