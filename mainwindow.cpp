@@ -4,6 +4,7 @@
 #include "entriesmanager.h"
 #include "addeditdevicedialog.h"
 #include <QMessageBox>
+#include "databasemanager.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -28,6 +29,8 @@ MainWindow::MainWindow(QWidget *parent) :
     model = new QStandardItemModel(this);
     model->setHorizontalHeaderLabels(labels);
     ui->tableView->setModel(model);
+
+    DatabaseManager::getInstance();
 }
 
 MainWindow::~MainWindow()

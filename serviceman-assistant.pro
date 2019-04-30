@@ -27,16 +27,20 @@ CONFIG += c++11
 SOURCES += \
     addeditdevicedialog.cpp \
         addedititemdialog.cpp \
+    databasemanager.cpp \
     databaseselectdialog.cpp \
         entriesmanager.cpp \
+    localdatabasemanager.cpp \
         main.cpp \
         mainwindow.cpp \
 
 HEADERS += \
     addeditdevicedialog.h \
         addedititemdialog.h \
+    databasemanager.h \
     databaseselectdialog.h \
         entriesmanager.h \
+    localdatabasemanager.h \
         mainwindow.h \
 
 FORMS += \
