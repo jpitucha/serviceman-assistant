@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QStandardItemModel>
+#include "databaseselectdialog.h"
 
 namespace Ui {
 class MainWindow;
@@ -14,6 +15,8 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+    void start();
+    DatabaseSelectDialog *dsd;
     QStringList clientsList;
     QStringList modelsList;
     QStringList damagesList;
@@ -22,6 +25,9 @@ public:
     QStringList devicesList;
     bool checkIfDeviceListContainsSN();
     ~MainWindow();
+
+public slots:
+    void retry();
 
 private slots:
     void openClientsDialog();

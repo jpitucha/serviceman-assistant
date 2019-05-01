@@ -44,18 +44,11 @@ int DatabaseManager::init() {
     }
 }
 
-
-
-
-
-
-//if (settings->value("localPath", "null") != "null") {
-//    ldm = new LocalDatabaseManager(settings->value("localPath").toString());
-//    if (ldm->init()) {
-//        return true;
-//    } else {
-//        return false;
-//    }
-//} else {
-//    return false;
-//}
+ /* CODES
+  * 0 - OK
+  * 1 - Local / Remote Data Manager failed
+  * 2 - localPath not provided in settings
+  * 3 - databaseType neither 'local' nor 'remote'
+  * 4 - databaseType not provided in settings
+  * 5 - settings file does not exists
+  */

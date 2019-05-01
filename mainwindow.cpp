@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include "databasemanager.h"
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -29,13 +30,61 @@ MainWindow::MainWindow(QWidget *parent) :
     model = new QStandardItemModel(this);
     model->setHorizontalHeaderLabels(labels);
     ui->tableView->setModel(model);
-
-    DatabaseManager::getInstance();
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
+void MainWindow::start() {
+    switch (DatabaseManager::getInstance()->init()) {
+    case 0: {
+        show();
+        break;
+    }
+    case 1: {
+        if (QMessageBox::critical(this, "Błąd", "Wystąpił problem przy połączeniu z bazą danych. Popraw ustawienia!") == QMessageBox::Ok) {
+            dsd = new DatabaseSelectDialog(true, this);
+            connect(dsd, SIGNAL(accepted()), this, SLOT(retry()));
+            dsd->show();
+        }
+        break;
+    }
+    case 2: {
+        if (QMessageBox::critical(this, "Błąd", "Brak ścieżki do bazy danych. Popraw ustawienia!") == QMessageBox::Ok) {
+            dsd = new DatabaseSelectDialog(true, this);
+            connect(dsd, SIGNAL(accepted()), this, SLOT(retry()));
+            dsd->show();
+        }
+        break;
+    }
+    case 3: {
+        if (QMessageBox::critical(this, "Błąd", "Nieznana lokalizacja bazy danych. Popraw ustawienia!") == QMessageBox::Ok) {
+            dsd = new DatabaseSelectDialog(true, this);
+            connect(dsd, SIGNAL(accepted()), this, SLOT(retry()));
+            dsd->show();
+        }
+        break;
+    }
+    case 4: {
+        if (QMessageBox::critical(this, "Błąd", "Nieznany typ połączenia z bazą danych. Popraw ustawienia!") == QMessageBox::Ok) {
+            dsd = new DatabaseSelectDialog(true, this);
+            connect(dsd, SIGNAL(accepted()), this, SLOT(retry()));
+            dsd->show();
+        }
+        break;
+    }
+    case 5: {
+        if (QMessageBox::critical(this, "Błąd", "Plik ustawień nie istnieje. Popraw ustawienia!") == QMessageBox::Ok) {
+            dsd = new DatabaseSelectDialog(true, this);
+            connect(dsd, SIGNAL(accepted()), this, SLOT(retry()));
+            dsd->show();
+        }
+        break;
+    }
+    }
+}
+
+void MainWindow::retry() {
+    //save settings
+    dsd->deleteLater();
+    start();
 }
 
 void MainWindow::openClientsDialog() {
@@ -113,4 +162,9 @@ void MainWindow::deleteDevice() {
 
 bool MainWindow::checkIfDeviceListContainsSN() {
     return false;
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
 }
