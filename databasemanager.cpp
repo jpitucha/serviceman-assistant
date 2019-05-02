@@ -16,57 +16,33 @@ DatabaseManager::DatabaseManager(QObject * parent): QObject(parent) {
 }
 
 int DatabaseManager::init() {
-    if (QFile::exists(QDir::currentPath() + "/settings.ini")) {
-        settings = new QSettings("settings.ini", QSettings::IniFormat);
-        if (settings->value("databaseType", "null") != "null") {
-            if (settings->value("databaseType") == "local") {
-                if (settings->value("localPath", "null") != "null") {
-                    ldm = new LocalDatabaseManager(settings->value("localPath").toString());
-                    if (ldm->init()) {
-                        return 0;
-                    } else {
-                        return 1;
-                    }
-                } else {
-                    return 2;
-                }
-            } else if (settings->value("databaseType") == "remote") {
-                //
-                if (settings->value("remoteHost", "null") != "null") {
-                    if (settings->value("remotePort", "null") != "null") {
-                        if (settings->value("remoteName", "null") != "null") {
-                            if (settings->value("remoteUser", "null") != "null") {
-                                if (settings->value("remotePassword", "null") != "null") {
-                                    rdm = new RemoteDatabaseManager(settings->value("remoteHost").toString(), settings->value("remotePort").toString(), settings->value("remoteName").toString(), settings->value("remoteUser").toString(), settings->value("remotePassword").toString());
-                                    if (rdm->init()) {
-                                        return  0;
-                                    } else {
-                                        return 1;
-                                    }
-                                } else {
-                                    return 10;
-                                }
-                            } else {
-                                return 9;
-                            }
-                        } else {
-                            return 8;
-                        }
-                    } else {
-                        return 7;
-                    }
-                } else {
-                    return 6;
-                }
-                //
-            } else {
-                return 3;
-            }
-        } else {
-            return 4;
-        }
+    if (!QFile::exists(QDir::currentPath() + "/settings.ini")) return 5;
+    settings = new QSettings("settings.ini", QSettings::IniFormat);
+    if (settings->value("databaseType", "null") == "null") return 4;
+    if (settings->value("databaseType") == "local") {
+        if (settings->value("localPath", "null") == "null") return 2;
+        localSettings = settings->value("localPath").toString();
+        ldm = new LocalDatabaseManager(settings->value("localPath").toString());
+        if (ldm->init()) return 0; else return 1;
+    } else if (settings->value("databaseType") == "remote") {
+        if (settings->value("remoteHost", "null") == "null") return 6;
+        if (settings->value("remotePort", "null") == "null") return 7;
+        if (settings->value("remoteName", "null") == "null") return 8;
+        if (settings->value("remoteUser", "null") == "null") return 9;
+        if (settings->value("remotePassword", "null") == "null") return 10;
+        remoteSettings << settings->value("remoteHost").toString();
+        remoteSettings << settings->value("remotePort").toString();
+        remoteSettings << settings->value("remoteName").toString();
+        remoteSettings << settings->value("remoteUser").toString();
+        remoteSettings << settings->value("remotePassword").toString();
+        rdm = new RemoteDatabaseManager(remoteSettings.at(0),
+                                        remoteSettings.at(1),
+                                        remoteSettings.at(2),
+                                        remoteSettings.at(3),
+                                        remoteSettings.at(4));
+        if (rdm->init()) return 0; else return 1;
     } else {
-        return 5;
+        return 3;
     }
 }
 

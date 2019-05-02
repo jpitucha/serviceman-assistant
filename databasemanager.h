@@ -21,6 +21,8 @@ private:
     QSettings *settings;
     LocalDatabaseManager *ldm;
     RemoteDatabaseManager *rdm;
+    QStringList remoteSettings;
+    QString localSettings;
 };
 
 #endif // DATABASEMANAGER_H
