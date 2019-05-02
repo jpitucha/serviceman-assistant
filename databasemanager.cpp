@@ -38,20 +38,25 @@ int DatabaseManager::init() {
                             if (settings->value("remoteUser", "null") != "null") {
                                 if (settings->value("remotePassword", "null") != "null") {
                                     rdm = new RemoteDatabaseManager(settings->value("remoteHost").toString(), settings->value("remotePort").toString(), settings->value("remoteName").toString(), settings->value("remoteUser").toString(), settings->value("remotePassword").toString());
+                                    if (rdm->init()) {
+                                        return  0;
+                                    } else {
+                                        return 1;
+                                    }
                                 } else {
-                                    return 9;//remotePassword not provided in settings
+                                    return 10;
                                 }
                             } else {
-                                return 9;//remoteUser not provided in settings
+                                return 9;
                             }
                         } else {
-                            return 8;//remoteName not provided in settings
+                            return 8;
                         }
                     } else {
-                        return 7;//remotePort not provided in settings
+                        return 7;
                     }
                 } else {
-                    return 6;//remoteHost not provided in settings
+                    return 6;
                 }
                 //
             } else {
@@ -72,13 +77,18 @@ int DatabaseManager::init() {
   * 3 - databaseType neither 'local' nor 'remote'
   * 4 - databaseType not provided in settings
   * 5 - settings file does not exists
+  * 6 - remoteHost not provided in settings
+  * 7 - remotePort not provided in settings
+  * 8 - remoteName not provided in setiings
+  * 9 - remoteUser not provided in settings
+  * 10 - remotePassword not provided in settings
   */
 
 void DatabaseManager::saveLocalSettings(QString settings) {
     this->settings->clear();
     this->settings->setValue("databaseType", "local");
     this->settings->setValue("localPath", settings);
-    this->settings->sync(); //optional
+    this->settings->sync(); //flush
 }
 
 void DatabaseManager::saveRemoteSettings(QString settings) {
