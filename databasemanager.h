@@ -19,6 +19,7 @@ private:
     static DatabaseManager *instance;
     QSettings *settings;
     LocalDatabaseManager *ldm;
+
 };
 
 #endif // DATABASEMANAGER_H

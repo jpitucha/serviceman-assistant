@@ -25,25 +25,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-    addeditdevicedialog.cpp \
+        addeditdevicedialog.cpp \
         addedititemdialog.cpp \
-    databasemanager.cpp \
-    databaseselectdialog.cpp \
+        databasemanager.cpp \
+        databaseselectdialog.cpp \
         entriesmanager.cpp \
-    localdatabasemanager.cpp \
+        localdatabasemanager.cpp \
         main.cpp \
-        mainwindow.cpp \ \
-    remotedatamanager.cpp
+        mainwindow.cpp \
+        remotedatabasemanager.cpp
 
 HEADERS += \
-    addeditdevicedialog.h \
+        addeditdevicedialog.h \
         addedititemdialog.h \
-    databasemanager.h \
-    databaseselectdialog.h \
+        databasemanager.h \
+        databaseselectdialog.h \
         entriesmanager.h \
-    localdatabasemanager.h \
-        mainwindow.h \ \
-    remotedatamanager.h
+        localdatabasemanager.h \
+        mainwindow.h \
+        remotedatabasemanager.h
 
 FORMS += \
         addeditdevicedialog.ui \
