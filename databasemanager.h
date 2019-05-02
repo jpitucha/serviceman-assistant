@@ -23,6 +23,7 @@ private:
     RemoteDatabaseManager *rdm;
     QStringList remoteSettings;
     QString localSettings;
+    char databaseType;
 };
 
 #endif // DATABASEMANAGER_H

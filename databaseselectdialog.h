@@ -21,6 +21,7 @@ public:
 public slots:
     void selectLocalDatabase();
     void selectRemoteDatabase();
+    void reject();
 
 private slots:
     void on_localBrowseBtn_clicked();
@@ -28,6 +29,7 @@ private slots:
 private:
     Ui::DatabaseSelectDialog *ui;
     bool onStartup;
+    void clearInputs();
 };
 
 #endif // DATABASESELECTDIALOG_H

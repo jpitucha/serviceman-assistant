@@ -23,6 +23,7 @@ int DatabaseManager::init() {
         if (settings->value("localPath", "null") == "null") return 2;
         localSettings = settings->value("localPath").toString();
         ldm = new LocalDatabaseManager(settings->value("localPath").toString());
+        databaseType = 'l';
         if (ldm->init()) return 0; else return 1;
     } else if (settings->value("databaseType") == "remote") {
         if (settings->value("remoteHost", "null") == "null") return 6;
@@ -40,6 +41,7 @@ int DatabaseManager::init() {
                                         remoteSettings.at(2),
                                         remoteSettings.at(3),
                                         remoteSettings.at(4));
+        databaseType = 'r';
         if (rdm->init()) return 0; else return 1;
     } else {
         return 3;
@@ -61,6 +63,7 @@ int DatabaseManager::init() {
   */
 
 void DatabaseManager::saveLocalSettings(QString settings) {
+    this->settings = new QSettings("settings.ini", QSettings::IniFormat);
     this->settings->clear();
     this->settings->setValue("databaseType", "local");
     this->settings->setValue("localPath", settings);
@@ -68,6 +71,7 @@ void DatabaseManager::saveLocalSettings(QString settings) {
 }
 
 void DatabaseManager::saveRemoteSettings(QString settings) {
+    this->settings = new QSettings("settings.ini", QSettings::IniFormat);
     this->settings->clear();
     this->settings->setValue("databaseType", "remote");
     this->settings->setValue("remoteHost", settings.split(";").at(0));

@@ -6,7 +6,6 @@
 #include <QMessageBox>
 #include "databasemanager.h"
 
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
