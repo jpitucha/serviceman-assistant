@@ -82,7 +82,11 @@ void MainWindow::start() {
 }
 
 void MainWindow::retry() {
-    //save settings
+    if (dsd->getSelected() == 'l') {
+        DatabaseManager::getInstance()->saveLocalSettings(dsd->getLocal());
+    } else if (dsd->getSelected() == 'r') {
+        DatabaseManager::getInstance()->saveRemoteSettings(dsd->getRemote());
+    }
     dsd->deleteLater();
     start();
 }

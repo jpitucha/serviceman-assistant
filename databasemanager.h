@@ -11,16 +11,14 @@ class DatabaseManager : public QObject
 public:
     static DatabaseManager *getInstance();
     int init();
+    void saveLocalSettings(QString settings);
+    void saveRemoteSettings(QString settings);
 
 private:
     explicit DatabaseManager(QObject *parent = nullptr);
     static DatabaseManager *instance;
     QSettings *settings;
     LocalDatabaseManager *ldm;
-
-signals:
-
-public slots:
 };
 
 #endif // DATABASEMANAGER_H

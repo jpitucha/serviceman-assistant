@@ -52,3 +52,21 @@ int DatabaseManager::init() {
   * 4 - databaseType not provided in settings
   * 5 - settings file does not exists
   */
+
+void DatabaseManager::saveLocalSettings(QString settings) {
+    this->settings->clear();
+    this->settings->setValue("databaseType", "local");
+    this->settings->setValue("localPath", settings);
+    this->settings->sync(); //optional
+}
+
+void DatabaseManager::saveRemoteSettings(QString settings) {
+    this->settings->clear();
+    this->settings->setValue("databaseType", "remote");
+    this->settings->setValue("remoteHost", settings.split(";").at(0));
+    this->settings->setValue("remotePort", settings.split(";").at(1));
+    this->settings->setValue("remoteName", settings.split(";").at(2));
+    this->settings->setValue("remoteUser", settings.split(";").at(3));
+    this->settings->setValue("remotePassword", settings.split(";").at(4));
+    this->settings->sync();
+}
