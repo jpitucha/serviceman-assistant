@@ -1,5 +1,4 @@
 #include "databasemanager.h"
-#include "localdatabasemanager.h"
 #include <QDir>
 #include <QFile>
 
@@ -32,7 +31,29 @@ int DatabaseManager::init() {
                     return 2;
                 }
             } else if (settings->value("databaseType") == "remote") {
-                return 1; // handle remote DB part
+                //
+                if (settings->value("remoteHost", "null") != "null") {
+                    if (settings->value("remotePort", "null") != "null") {
+                        if (settings->value("remoteName", "null") != "null") {
+                            if (settings->value("remoteUser", "null") != "null") {
+                                if (settings->value("remotePassword", "null") != "null") {
+                                    rdm = new RemoteDatabaseManager(settings->value("remoteHost").toString(), settings->value("remotePort").toString(), settings->value("remoteName").toString(), settings->value("remoteUser").toString(), settings->value("remotePassword").toString());
+                                } else {
+                                    return 9;//remotePassword not provided in settings
+                                }
+                            } else {
+                                return 9;//remoteUser not provided in settings
+                            }
+                        } else {
+                            return 8;//remoteName not provided in settings
+                        }
+                    } else {
+                        return 7;//remotePort not provided in settings
+                    }
+                } else {
+                    return 6;//remoteHost not provided in settings
+                }
+                //
             } else {
                 return 3;
             }

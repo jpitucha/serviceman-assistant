@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QSettings>
 #include "localdatabasemanager.h"
+#include "remotedatabasemanager.h"
 
 class DatabaseManager : public QObject
 {
@@ -19,7 +20,7 @@ private:
     static DatabaseManager *instance;
     QSettings *settings;
     LocalDatabaseManager *ldm;
-
+    RemoteDatabaseManager *rdm;
 };
 
 #endif // DATABASEMANAGER_H
