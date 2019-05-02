@@ -22,7 +22,7 @@ int DatabaseManager::init() {
     if (settings->value("databaseType") == "local") {
         if (settings->value("localPath", "null") == "null") return 2;
         localSettings = settings->value("localPath").toString();
-        ldm = new LocalDatabaseManager(settings->value("localPath").toString());
+        ldm = new LocalDatabaseManager(localSettings);
         databaseType = 'l';
         if (ldm->init()) return 0; else return 1;
     } else if (settings->value("databaseType") == "remote") {
@@ -64,7 +64,7 @@ int DatabaseManager::init() {
 
 void DatabaseManager::saveLocalSettings(QString settings) {
     this->settings = new QSettings("settings.ini", QSettings::IniFormat);
-    this->settings->clear();
+    this->settings->clear(); //we don't want to keep old entries
     this->settings->setValue("databaseType", "local");
     this->settings->setValue("localPath", settings);
     this->settings->sync(); //flush

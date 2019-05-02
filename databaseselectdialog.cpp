@@ -43,11 +43,7 @@ void DatabaseSelectDialog::on_localBrowseBtn_clicked()
 }
 
 char DatabaseSelectDialog::getSelected() {
-    if (ui->localRadioBtn->isChecked()) {
-        return 'l';
-    } else {
-        return 'r';
-    }
+    if (ui->localRadioBtn->isChecked()) return 'l'; else return 'r';
 }
 
 QString DatabaseSelectDialog::getLocal() {
@@ -69,7 +65,7 @@ void DatabaseSelectDialog::clearInputs() {
 
 void DatabaseSelectDialog::reject() {
     if (onStartup) {
-        if (QMessageBox::question(this, "Uwaga", "To spowoduje zamknięcie aplikacji") == QMessageBox::Yes) {
+        if (QMessageBox::question(this, "Uwaga", "To spowoduje zamknięcie aplikacji. Kontynuować?") == QMessageBox::Yes) {
             QApplication::quit();
         }
     }
