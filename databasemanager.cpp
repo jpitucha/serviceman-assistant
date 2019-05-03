@@ -2,6 +2,8 @@
 #include <QDir>
 #include <QFile>
 
+#include <QDebug>
+
 DatabaseManager * DatabaseManager::instance = nullptr;
 
 DatabaseManager * DatabaseManager::getInstance() {
@@ -22,8 +24,8 @@ int DatabaseManager::init() {
     if (settings->value("databaseType") == "local") {
         if (settings->value("localPath", "null") == "null") return 2;
         localSettings = settings->value("localPath").toString();
+        *databaseTyp = "local";
         ldm = new LocalDatabaseManager(localSettings);
-        databaseType = 'l';
         if (ldm->init()) return 0; else return 1;
     } else if (settings->value("databaseType") == "remote") {
         if (settings->value("remoteHost", "null") == "null") return 6;
@@ -36,12 +38,12 @@ int DatabaseManager::init() {
         remoteSettings << settings->value("remoteName").toString();
         remoteSettings << settings->value("remoteUser").toString();
         remoteSettings << settings->value("remotePassword").toString();
+        *databaseTyp = "remote";
         rdm = new RemoteDatabaseManager(remoteSettings.at(0),
                                         remoteSettings.at(1),
                                         remoteSettings.at(2),
                                         remoteSettings.at(3),
                                         remoteSettings.at(4));
-        databaseType = 'r';
         if (rdm->init()) return 0; else return 1;
     } else {
         return 3;
@@ -83,7 +85,7 @@ void DatabaseManager::saveRemoteSettings(QString settings) {
 }
 
 QStringList DatabaseManager::getAllClients() {
-    if (databaseType == 'l') {
+    if (*databaseTyp == "local") {
         return ldm->getAllClients();
     } else {
         return rdm->getAllClients();
@@ -91,7 +93,7 @@ QStringList DatabaseManager::getAllClients() {
 }
 
 QStringList DatabaseManager::getAllDamages() {
-    if (databaseType == 'l') {
+    if (*databaseTyp == "local") {
         return ldm->getAllDamages();
     } else {
         return rdm->getAllDamages();
@@ -99,7 +101,7 @@ QStringList DatabaseManager::getAllDamages() {
 }
 
 QStringList DatabaseManager::getAllModels() {
-    if (databaseType == 'l') {
+    if (*databaseTyp == "local") {
         return ldm->getAllModels();
     } else {
         return rdm->getAllModels();
@@ -107,7 +109,7 @@ QStringList DatabaseManager::getAllModels() {
 }
 
 QStringList DatabaseManager::getAllTechnicians() {
-    if (databaseType == 'l') {
+    if (*databaseTyp == "local") {
         return ldm->getAllTechnicians();
     } else {
         return rdm->getAllTechnicians();

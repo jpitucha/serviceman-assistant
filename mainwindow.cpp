@@ -5,6 +5,7 @@
 #include "addeditdevicedialog.h"
 #include <QMessageBox>
 #include "databasemanager.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -106,8 +107,9 @@ void MainWindow::openDamagesDialog() {
 }
 
 void MainWindow::openTechniciansDialog() {
-    EntriesManager *em = new EntriesManager("Serwisanci", techniciansList, this);
-    em->open();
+//    EntriesManager *em = new EntriesManager("Serwisanci", techniciansList, this);
+//    em->open();
+    qDebug() << DatabaseManager::getInstance()->getAllClients();
 }
 
 void MainWindow::openAddDeviceDialog() {

@@ -10,16 +10,16 @@ LocalDatabaseManager::LocalDatabaseManager(QString path, QObject *parent) : QObj
 bool LocalDatabaseManager::init() {
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(path);
-    db.open();
-    if (db.isOpen()) q = new QSqlQuery(db);
+    if (db.open()) q = new QSqlQuery(db);
     return db.isOpen();
 }
 
 QStringList LocalDatabaseManager::getAllClients() {
-    q->exec("SELECT * FROM clients");
+    QSqlQuery x;
+    x.exec("SELECT * FROM clients");
     QStringList *tmp = new QStringList();
-    while (q->next()) {
-        tmp->append(q->value(0).toString());
+    while (x.next()) {
+        tmp->append(x.value(0).toString());
     }
     return *tmp;
 }

@@ -18,6 +18,7 @@ public:
     QStringList getAllDamages();
     QStringList getAllModels();
     QStringList getAllTechnicians();
+    QString *databaseTyp = new QString("");
 
 private:
     explicit DatabaseManager(QObject *parent = nullptr);
@@ -27,7 +28,7 @@ private:
     RemoteDatabaseManager *rdm;
     QStringList remoteSettings;
     QString localSettings;
-    char databaseType;
+
 };
 
 #endif // DATABASEMANAGER_H

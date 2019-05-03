@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QStandardItemModel>
+#include <QStringListModel>
 #include "databaseselectdialog.h"
 
 namespace Ui {
@@ -41,6 +42,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QStandardItemModel *model;
+    QStringListModel *devicesModel;
 };
 
 #endif // MAINWINDOW_H
