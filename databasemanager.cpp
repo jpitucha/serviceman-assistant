@@ -81,3 +81,35 @@ void DatabaseManager::saveRemoteSettings(QString settings) {
     this->settings->setValue("remotePassword", settings.split(";").at(4));
     this->settings->sync();
 }
+
+QStringList DatabaseManager::getAllClients() {
+    if (databaseType == 'l') {
+        return ldm->getAllClients();
+    } else {
+        return rdm->getAllClients();
+    }
+}
+
+QStringList DatabaseManager::getAllDamages() {
+    if (databaseType == 'l') {
+        return ldm->getAllDamages();
+    } else {
+        return rdm->getAllDamages();
+    }
+}
+
+QStringList DatabaseManager::getAllModels() {
+    if (databaseType == 'l') {
+        return ldm->getAllModels();
+    } else {
+        return rdm->getAllModels();
+    }
+}
+
+QStringList DatabaseManager::getAllTechnicians() {
+    if (databaseType == 'l') {
+        return ldm->getAllTechnicians();
+    } else {
+        return rdm->getAllTechnicians();
+    }
+}

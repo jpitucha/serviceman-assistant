@@ -14,6 +14,10 @@ public:
     int init();
     void saveLocalSettings(QString settings);
     void saveRemoteSettings(QString settings);
+    QStringList getAllClients();
+    QStringList getAllDamages();
+    QStringList getAllModels();
+    QStringList getAllTechnicians();
 
 private:
     explicit DatabaseManager(QObject *parent = nullptr);

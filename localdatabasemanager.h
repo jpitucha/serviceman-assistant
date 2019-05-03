@@ -2,6 +2,8 @@
 #define LOCALDATABASEMANAGER_H
 
 #include <QObject>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 
 class LocalDatabaseManager : public QObject
 {
@@ -9,10 +11,20 @@ class LocalDatabaseManager : public QObject
 public:
     explicit LocalDatabaseManager(QString path, QObject *parent = nullptr);
     bool init();
+    QStringList getAllClients();
+    QStringList getAllDamages();
+    QStringList getAllModels();
+    QStringList getAllTechnicians();
+
 
 signals:
 
 public slots:
+
+private:
+    QSqlDatabase db;
+    QString path;
+    QSqlQuery *q;
 };
 
 #endif // LOCALDATABASEMANAGER_H
