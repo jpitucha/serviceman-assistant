@@ -16,7 +16,6 @@ public:
     QStringList getAllModels();
     QStringList getAllTechnicians();
 
-
 signals:
 
 public slots:
@@ -25,6 +24,7 @@ private:
     QSqlDatabase db;
     QString path;
     QSqlQuery *q;
+    QStringList *tmp;
 };
 
 #endif // LOCALDATABASEMANAGER_H

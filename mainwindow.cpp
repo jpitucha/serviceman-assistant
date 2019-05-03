@@ -110,6 +110,9 @@ void MainWindow::openTechniciansDialog() {
 //    EntriesManager *em = new EntriesManager("Serwisanci", techniciansList, this);
 //    em->open();
     qDebug() << DatabaseManager::getInstance()->getAllClients();
+    qDebug() << DatabaseManager::getInstance()->getAllModels();
+    qDebug() << DatabaseManager::getInstance()->getAllDamages();
+    qDebug() << DatabaseManager::getInstance()->getAllTechnicians();
 }
 
 void MainWindow::openAddDeviceDialog() {

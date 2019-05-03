@@ -15,18 +15,17 @@ bool LocalDatabaseManager::init() {
 }
 
 QStringList LocalDatabaseManager::getAllClients() {
-    QSqlQuery x;
-    x.exec("SELECT * FROM clients");
-    QStringList *tmp = new QStringList();
-    while (x.next()) {
-        tmp->append(x.value(0).toString());
+    q->exec("SELECT * FROM clients");
+    tmp = new QStringList();
+    while (q->next()) {
+        tmp->append(q->value(0).toString());
     }
     return *tmp;
 }
 
 QStringList LocalDatabaseManager::getAllDamages() {
     q->exec("SELECT * FROM damages");
-    QStringList *tmp = new QStringList();
+    tmp = new QStringList();
     while (q->next()) {
         tmp->append(q->value(0).toString());
     }
@@ -35,7 +34,7 @@ QStringList LocalDatabaseManager::getAllDamages() {
 
 QStringList LocalDatabaseManager::getAllModels() {
     q->exec("SELECT * FROM models");
-    QStringList *tmp = new QStringList();
+    tmp = new QStringList();
     while (q->next()) {
         tmp->append(q->value(0).toString());
     }
@@ -44,7 +43,7 @@ QStringList LocalDatabaseManager::getAllModels() {
 
 QStringList LocalDatabaseManager::getAllTechnicians() {
     q->exec("SELECT * FROM technicians");
-    QStringList *tmp = new QStringList();
+    tmp = new QStringList();
     while (q->next()) {
         tmp->append(q->value(0).toString());
     }
