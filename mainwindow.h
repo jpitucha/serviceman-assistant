@@ -25,6 +25,7 @@ public:
     QStringList labels;
     QStringList devicesList;
     bool checkIfDeviceListContainsSN();
+    void loadData();
     ~MainWindow();
 
 public slots:

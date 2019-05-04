@@ -35,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::start() {
     switch (DatabaseManager::getInstance()->init()) {
     case 0: {
+        loadData();
         show();
         break;
     }
@@ -81,6 +82,13 @@ void MainWindow::start() {
     }
 }
 
+void MainWindow::loadData() {
+    qDebug() << DatabaseManager::getInstance()->getAllClients();
+    qDebug() << DatabaseManager::getInstance()->getAllModels();
+    qDebug() << DatabaseManager::getInstance()->getAllDamages();
+    qDebug() << DatabaseManager::getInstance()->getAllTechnicians();
+}
+
 void MainWindow::retry() {
     if (dsd->getSelected() == 'l') {
         DatabaseManager::getInstance()->saveLocalSettings(dsd->getLocal());
@@ -107,12 +115,8 @@ void MainWindow::openDamagesDialog() {
 }
 
 void MainWindow::openTechniciansDialog() {
-//    EntriesManager *em = new EntriesManager("Serwisanci", techniciansList, this);
-//    em->open();
-    qDebug() << DatabaseManager::getInstance()->getAllClients();
-    qDebug() << DatabaseManager::getInstance()->getAllModels();
-    qDebug() << DatabaseManager::getInstance()->getAllDamages();
-    qDebug() << DatabaseManager::getInstance()->getAllTechnicians();
+    EntriesManager *em = new EntriesManager("Serwisanci", techniciansList, this);
+    em->open();
 }
 
 void MainWindow::openAddDeviceDialog() {
