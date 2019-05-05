@@ -15,6 +15,7 @@ public:
     QStringList getAllDamages();
     QStringList getAllModels();
     QStringList getAllTechnicians();
+    QStringList getAll(QString table);
 
 signals:
 

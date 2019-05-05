@@ -18,10 +18,10 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     void start();
     DatabaseSelectDialog *dsd;
-    QStringList clientsList;
-    QStringList modelsList;
-    QStringList damagesList;
-    QStringList techniciansList;
+    QStringList clientsList;//to delete
+    QStringList modelsList;//to delete
+    QStringList damagesList;//to delete
+    QStringList techniciansList;//to delete
     QStringList labels;
     QStringList devicesList;
     bool checkIfDeviceListContainsSN();

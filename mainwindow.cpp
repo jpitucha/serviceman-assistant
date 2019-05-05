@@ -22,10 +22,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     labels << "SN" << "Klient" << "Model";
 
-    clientsList << "Klient 1" << "Klient 2" << "Klient 3";
-    modelsList << "Urządzenie 1" << "Urządzenie 2" << "Urządzenie 3";
-    damagesList << "Usterka 1" << "Usterka 2" << "Usterka 3";
-    techniciansList << "Serwisant 1" << "Serwisant 2" << "Serwisant 3";
+//    clientsList << "Klient 1" << "Klient 2" << "Klient 3";
+//    modelsList << "Urządzenie 1" << "Urządzenie 2" << "Urządzenie 3";
+//    damagesList << "Usterka 1" << "Usterka 2" << "Usterka 3";
+//    techniciansList << "Serwisant 1" << "Serwisant 2" << "Serwisant 3";
 
     model = new QStandardItemModel(this);
     model->setHorizontalHeaderLabels(labels);
@@ -84,9 +84,9 @@ void MainWindow::start() {
 
 void MainWindow::loadData() {
     qDebug() << DatabaseManager::getInstance()->getAllClients();
-    qDebug() << DatabaseManager::getInstance()->getAllModels();
-    qDebug() << DatabaseManager::getInstance()->getAllDamages();
-    qDebug() << DatabaseManager::getInstance()->getAllTechnicians();
+//    qDebug() << DatabaseManager::getInstance()->getAllModels();
+//    qDebug() << DatabaseManager::getInstance()->getAllDamages();
+//    qDebug() << DatabaseManager::getInstance()->getAllTechnicians();
 }
 
 void MainWindow::retry() {
@@ -100,23 +100,23 @@ void MainWindow::retry() {
 }
 
 void MainWindow::openClientsDialog() {
-    EntriesManager *em = new EntriesManager("Klienci", clientsList, this);
-    em->open();
+//    EntriesManager *em = new EntriesManager("Klienci", clientsList, this);
+//    em->open();
 }
 
 void MainWindow::openDevicesDialog() {
-    EntriesManager *em = new EntriesManager("Modele", modelsList, this);
-    em->open();
+//    EntriesManager *em = new EntriesManager("Modele", modelsList, this);
+//    em->open();
 }
 
 void MainWindow::openDamagesDialog() {
-    EntriesManager *em = new EntriesManager("Usterki", damagesList, this);
-    em->open();
+//    EntriesManager *em = new EntriesManager("Usterki", damagesList, this);
+//    em->open();
 }
 
 void MainWindow::openTechniciansDialog() {
-    EntriesManager *em = new EntriesManager("Serwisanci", techniciansList, this);
-    em->open();
+//    EntriesManager *em = new EntriesManager("Serwisanci", techniciansList, this);
+//    em->open();
 }
 
 void MainWindow::openAddDeviceDialog() {

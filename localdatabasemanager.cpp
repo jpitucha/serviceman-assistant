@@ -49,3 +49,21 @@ QStringList LocalDatabaseManager::getAllTechnicians() {
     }
     return *tmp;
 }
+
+QStringList LocalDatabaseManager::getAll(QString table) {
+    q->exec("SELECT * FROM " + table);
+    int i = 0;
+    tmp = new QStringList();
+    while (q->next()) {
+        i = 0;
+        while (true) {
+            if (q->value(i).isValid()) {
+                tmp->append(q->value(i).toString());
+                i++;
+            } else {
+                break;
+            }
+        }
+    }
+    return *tmp;
+}

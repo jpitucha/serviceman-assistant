@@ -86,7 +86,7 @@ void DatabaseManager::saveRemoteSettings(QString settings) {
 
 QStringList DatabaseManager::getAllClients() {
     if (*databaseTyp == "local") {
-        return ldm->getAllClients();
+        return ldm->getAll("clients");
     } else {
         return rdm->getAllClients();
     }
