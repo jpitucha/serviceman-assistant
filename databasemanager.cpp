@@ -24,7 +24,7 @@ int DatabaseManager::init() {
     if (settings->value("databaseType") == "local") {
         if (settings->value("localPath", "null") == "null") return 2;
         localSettings = settings->value("localPath").toString();
-        *databaseTyp = "local";
+        *databaseType = "local";
         ldm = new LocalDatabaseManager(localSettings);
         if (ldm->init()) return 0; else return 1;
     } else if (settings->value("databaseType") == "remote") {
@@ -38,7 +38,7 @@ int DatabaseManager::init() {
         remoteSettings << settings->value("remoteName").toString();
         remoteSettings << settings->value("remoteUser").toString();
         remoteSettings << settings->value("remotePassword").toString();
-        *databaseTyp = "remote";
+        *databaseType = "remote";
         rdm = new RemoteDatabaseManager(remoteSettings.at(0),
                                         remoteSettings.at(1),
                                         remoteSettings.at(2),
@@ -84,34 +84,10 @@ void DatabaseManager::saveRemoteSettings(QString settings) {
     this->settings->sync();
 }
 
-QStringList DatabaseManager::getAllClients() {
-    if (*databaseTyp == "local") {
-        return ldm->getAll("clients");
+QStringList DatabaseManager::getAll(QString table) {
+    if (*databaseType == "local") {
+        return ldm->getAll(table);
     } else {
-        return rdm->getAllClients();
-    }
-}
-
-QStringList DatabaseManager::getAllDamages() {
-    if (*databaseTyp == "local") {
-        return ldm->getAllDamages();
-    } else {
-        return rdm->getAllDamages();
-    }
-}
-
-QStringList DatabaseManager::getAllModels() {
-    if (*databaseTyp == "local") {
-        return ldm->getAllModels();
-    } else {
-        return rdm->getAllModels();
-    }
-}
-
-QStringList DatabaseManager::getAllTechnicians() {
-    if (*databaseTyp == "local") {
-        return ldm->getAllTechnicians();
-    } else {
-        return rdm->getAllTechnicians();
+        return rdm->getAll(table);
     }
 }

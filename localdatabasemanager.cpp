@@ -14,42 +14,6 @@ bool LocalDatabaseManager::init() {
     return db.isOpen();
 }
 
-QStringList LocalDatabaseManager::getAllClients() {
-    q->exec("SELECT * FROM clients");
-    tmp = new QStringList();
-    while (q->next()) {
-        tmp->append(q->value(0).toString());
-    }
-    return *tmp;
-}
-
-QStringList LocalDatabaseManager::getAllDamages() {
-    q->exec("SELECT * FROM damages");
-    tmp = new QStringList();
-    while (q->next()) {
-        tmp->append(q->value(0).toString());
-    }
-    return *tmp;
-}
-
-QStringList LocalDatabaseManager::getAllModels() {
-    q->exec("SELECT * FROM models");
-    tmp = new QStringList();
-    while (q->next()) {
-        tmp->append(q->value(0).toString());
-    }
-    return *tmp;
-}
-
-QStringList LocalDatabaseManager::getAllTechnicians() {
-    q->exec("SELECT * FROM technicians");
-    tmp = new QStringList();
-    while (q->next()) {
-        tmp->append(q->value(0).toString());
-    }
-    return *tmp;
-}
-
 QStringList LocalDatabaseManager::getAll(QString table) {
     q->exec("SELECT * FROM " + table);
     int i = 0;

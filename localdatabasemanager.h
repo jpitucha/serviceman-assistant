@@ -11,10 +11,6 @@ class LocalDatabaseManager : public QObject
 public:
     explicit LocalDatabaseManager(QString path, QObject *parent = nullptr);
     bool init();
-    QStringList getAllClients();
-    QStringList getAllDamages();
-    QStringList getAllModels();
-    QStringList getAllTechnicians();
     QStringList getAll(QString table);
 
 signals:

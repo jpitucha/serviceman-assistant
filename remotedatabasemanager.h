@@ -9,10 +9,7 @@ class RemoteDatabaseManager : public QObject
 public:
     explicit RemoteDatabaseManager(QString  host, QString port, QString name, QString user, QString password, QObject *parent = nullptr);
     bool init();
-    QStringList getAllClients();
-    QStringList getAllDamages();
-    QStringList getAllModels();
-    QStringList getAllTechnicians();
+    QStringList getAll(QString table);
 
 signals:
 

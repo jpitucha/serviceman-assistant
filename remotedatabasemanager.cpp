@@ -9,18 +9,6 @@ bool RemoteDatabaseManager::init() {
     return true;
 }
 
-QStringList RemoteDatabaseManager::getAllClients() {
-    return QStringList();
-}
-
-QStringList RemoteDatabaseManager::getAllDamages() {
-    return QStringList();
-}
-
-QStringList RemoteDatabaseManager::getAllModels() {
-    return QStringList();
-}
-
-QStringList RemoteDatabaseManager::getAllTechnicians() {
+QStringList RemoteDatabaseManager::getAll(QString table) {
     return QStringList();
 }

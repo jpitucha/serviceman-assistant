@@ -83,10 +83,7 @@ void MainWindow::start() {
 }
 
 void MainWindow::loadData() {
-    qDebug() << DatabaseManager::getInstance()->getAllClients();
-//    qDebug() << DatabaseManager::getInstance()->getAllModels();
-//    qDebug() << DatabaseManager::getInstance()->getAllDamages();
-//    qDebug() << DatabaseManager::getInstance()->getAllTechnicians();
+
 }
 
 void MainWindow::retry() {
