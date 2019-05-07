@@ -13,7 +13,7 @@ QStringList RemoteDatabaseManager::getAll(QString table) {
     return QStringList();
 }
 
-void RemoteDatabaseManager::addRecord(QString table, int id, QStringList data) {
+void RemoteDatabaseManager::addRecord(QString table, QStringList data) {
 
 }
 

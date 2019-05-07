@@ -15,7 +15,7 @@ public:
     void saveLocalSettings(QString settings);
     void saveRemoteSettings(QString settings);
     QStringList getAll(QString table);
-    void addRecord(QString table, int id, QStringList data);
+    void addRecord(QString table, QStringList data);
     void editRecord(QString table, int id, QStringList data);
     void deleteRecord(QString table, int id);
 

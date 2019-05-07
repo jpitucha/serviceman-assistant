@@ -86,8 +86,8 @@ QStringList DatabaseManager::getAll(QString table) {
     if (databaseType == "local") return ldm->getAll(table); else return rdm->getAll(table);
 }
 
-void DatabaseManager::addRecord(QString table, int id, QStringList data) {
-    if (databaseType == "local") ldm->addRecord(table, id, data); else rdm->addRecord(table, id, data);
+void DatabaseManager::addRecord(QString table, QStringList data) {
+    if (databaseType == "local") ldm->addRecord(table, data); else rdm->addRecord(table, data);
 }
 
 void DatabaseManager::editRecord(QString table, int id, QStringList data) {
