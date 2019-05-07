@@ -1,6 +1,6 @@
 #include "localdatabasemanager.h"
 
-#include <QDebug>
+#include <QVariant>
 
 LocalDatabaseManager::LocalDatabaseManager(QString path, QObject *parent) : QObject(parent)
 {
@@ -30,4 +30,16 @@ QStringList LocalDatabaseManager::getAll(QString table) {
         }
     }
     return *tmp;
+}
+
+void LocalDatabaseManager::addRecord(QString table, int id, QStringList data) {
+
+}
+
+void LocalDatabaseManager::editRecord(QString table, int id, QStringList data) {
+
+}
+
+void LocalDatabaseManager::deleteRecord(QString table, int id) {
+
 }

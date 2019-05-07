@@ -5,7 +5,6 @@
 #include "addeditdevicedialog.h"
 #include <QMessageBox>
 #include "databasemanager.h"
-#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),

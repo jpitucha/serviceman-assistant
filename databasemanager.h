@@ -15,7 +15,9 @@ public:
     void saveLocalSettings(QString settings);
     void saveRemoteSettings(QString settings);
     QStringList getAll(QString table);
-    QString *databaseType = new QString("");
+    void addRecord(QString table, int id, QStringList data);
+    void editRecord(QString table, int id, QStringList data);
+    void deleteRecord(QString table, int id);
 
 private:
     explicit DatabaseManager(QObject *parent = nullptr);
@@ -25,7 +27,7 @@ private:
     RemoteDatabaseManager *rdm;
     QStringList remoteSettings;
     QString localSettings;
-
+    QString databaseType;
 };
 
 #endif // DATABASEMANAGER_H

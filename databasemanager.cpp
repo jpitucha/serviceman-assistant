@@ -2,8 +2,6 @@
 #include <QDir>
 #include <QFile>
 
-#include <QDebug>
-
 DatabaseManager * DatabaseManager::instance = nullptr;
 
 DatabaseManager * DatabaseManager::getInstance() {
@@ -24,7 +22,7 @@ int DatabaseManager::init() {
     if (settings->value("databaseType") == "local") {
         if (settings->value("localPath", "null") == "null") return 2;
         localSettings = settings->value("localPath").toString();
-        *databaseType = "local";
+        databaseType = "local";
         ldm = new LocalDatabaseManager(localSettings);
         if (ldm->init()) return 0; else return 1;
     } else if (settings->value("databaseType") == "remote") {
@@ -38,7 +36,7 @@ int DatabaseManager::init() {
         remoteSettings << settings->value("remoteName").toString();
         remoteSettings << settings->value("remoteUser").toString();
         remoteSettings << settings->value("remotePassword").toString();
-        *databaseType = "remote";
+        databaseType = "remote";
         rdm = new RemoteDatabaseManager(remoteSettings.at(0),
                                         remoteSettings.at(1),
                                         remoteSettings.at(2),
@@ -85,9 +83,17 @@ void DatabaseManager::saveRemoteSettings(QString settings) {
 }
 
 QStringList DatabaseManager::getAll(QString table) {
-    if (*databaseType == "local") {
-        return ldm->getAll(table);
-    } else {
-        return rdm->getAll(table);
-    }
+    if (databaseType == "local") return ldm->getAll(table); else return rdm->getAll(table);
+}
+
+void DatabaseManager::addRecord(QString table, int id, QStringList data) {
+    if (databaseType == "local") ldm->addRecord(table, id, data); else rdm->addRecord(table, id, data);
+}
+
+void DatabaseManager::editRecord(QString table, int id, QStringList data) {
+    if (databaseType == "local") ldm->editRecord(table, id, data); else rdm->editRecord(table, id, data);
+}
+
+void DatabaseManager::deleteRecord(QString table, int id) {
+    if (databaseType == "local") ldm->deleteRecord(table, id); else rdm->deleteRecord(table, id);
 }
