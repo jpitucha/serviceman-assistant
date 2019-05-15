@@ -2,6 +2,8 @@
 #define REMOTEDATABASEMANAGER_H
 
 #include <QObject>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 
 class RemoteDatabaseManager : public QObject
 {
@@ -17,6 +19,16 @@ public:
 signals:
 
 public slots:
+
+private:
+    QSqlDatabase db;
+    QString host;
+    QString port;
+    QString name;
+    QString user;
+    QString password;
+    QSqlQuery *q;
+    QStringList *tmp;
 };
 
 #endif // REMOTEDATABASEMANAGER_H
