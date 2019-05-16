@@ -5,6 +5,7 @@
 #include "addeditdevicedialog.h"
 #include <QMessageBox>
 #include "databasemanager.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -82,15 +83,10 @@ void MainWindow::start() {
 }
 
 void MainWindow::loadData() {
-
 }
 
 void MainWindow::retry() {
-    if (dsd->getSelected() == 'l') {
-        DatabaseManager::getInstance()->saveLocalSettings(dsd->getLocal());
-    } else if (dsd->getSelected() == 'r') {
-        DatabaseManager::getInstance()->saveRemoteSettings(dsd->getRemote());
-    }
+    DatabaseManager::getInstance()->saveSettings(dsd->getLocal());
     dsd->deleteLater();
     start();
 }

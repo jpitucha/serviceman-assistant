@@ -1,10 +1,9 @@
 #ifndef DATABASEMANAGER_H
 #define DATABASEMANAGER_H
 
-#include <QObject>
 #include <QSettings>
-#include "localdatabasemanager.h"
-#include "remotedatabasemanager.h"
+#include <QSqlDatabase>
+#include <QSqlQuery>
 
 class DatabaseManager : public QObject
 {
@@ -12,8 +11,7 @@ class DatabaseManager : public QObject
 public:
     static DatabaseManager *getInstance();
     int init();
-    void saveLocalSettings(QString settings);
-    void saveRemoteSettings(QString settings);
+    void saveSettings(QString settings);
     QStringList getAll(QString table);
     void addRecord(QString table, QStringList data);
     void editRecord(QString table, int id, QStringList data);
@@ -21,13 +19,13 @@ public:
 
 private:
     explicit DatabaseManager(QObject *parent = nullptr);
+    bool connect(QString path);
     static DatabaseManager *instance;
     QSettings *settings;
-    LocalDatabaseManager *ldm;
-    RemoteDatabaseManager *rdm;
-    QStringList remoteSettings;
-    QString localSettings;
-    QString databaseType;
+    QString path;
+    QSqlDatabase db;
+    QSqlQuery *q;
+    QStringList *tmp;
 };
 
 #endif // DATABASEMANAGER_H

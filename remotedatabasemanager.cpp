@@ -1,10 +1,10 @@
 #include "remotedatabasemanager.h"
 
 #include <QVariant>
+#include <QtSql>
 
-RemoteDatabaseManager::RemoteDatabaseManager(QString host, QString port, QString name, QString user, QString password, QObject *parent) : QObject(parent)
-{
-this->host = host;
+RemoteDatabaseManager::RemoteDatabaseManager(QString host, QString port, QString name, QString user, QString password, QObject *parent) : QObject(parent) {
+    this->host = host;
     this->port = port;
     this->name = name;
     this->user = user;
