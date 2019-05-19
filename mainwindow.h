@@ -18,14 +18,6 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     void start();
     DatabaseSelectDialog *dsd;
-    QStringList clientsList;//to delete
-    QStringList modelsList;//to delete
-    QStringList damagesList;//to delete
-    QStringList techniciansList;//to delete
-    QStringList labels;
-    QStringList devicesList;
-    bool checkIfDeviceListContainsSN();
-    void loadData();
     ~MainWindow();
 
 public slots:
@@ -41,9 +33,8 @@ private slots:
     void deleteDevice();
 
 private:
+    void loadData();
     Ui::MainWindow *ui;
-    QStandardItemModel *model;
-    QStringListModel *devicesModel;
 };
 
 #endif // MAINWINDOW_H

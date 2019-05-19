@@ -63,6 +63,7 @@ QStringList DatabaseManager::getAll(QString table) {
 }
 
 void DatabaseManager::addRecord(QString table, QStringList data) {
+    //args2 -> values
     QString *args = new QString();
     for (int i = 0; i < data.size(); i++) {
         if (i < data.size() - 1) args->append(data.at(i).split('=').at(0) + ", "); else args->append(data.at(i).split('=').at(0));
