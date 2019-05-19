@@ -26,8 +26,8 @@ int DatabaseManager::init() {
 /* CODES
   * 0 - OK
   * 1 - Open database failed
-  * 2 - path not provided in settings
-  * 3 - settings file does not exists
+  * 2 - Path not provided in settings
+  * 3 - Settings file does not exists
   */
 
 void DatabaseManager::saveSettings(QString settings) {

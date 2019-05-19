@@ -56,22 +56,6 @@ void MainWindow::start() {
         break;
     }
     case 3: {
-        if (QMessageBox::critical(this, "Błąd", "Nieznana lokalizacja bazy danych. Popraw ustawienia!") == QMessageBox::Ok) {
-            dsd = new DatabaseSelectDialog(true, this);
-            connect(dsd, SIGNAL(accepted()), this, SLOT(retry()));
-            dsd->show();
-        }
-        break;
-    }
-    case 4: {
-        if (QMessageBox::critical(this, "Błąd", "Nieznany typ połączenia z bazą danych. Popraw ustawienia!") == QMessageBox::Ok) {
-            dsd = new DatabaseSelectDialog(true, this);
-            connect(dsd, SIGNAL(accepted()), this, SLOT(retry()));
-            dsd->show();
-        }
-        break;
-    }
-    case 5: {
         if (QMessageBox::critical(this, "Błąd", "Plik ustawień nie istnieje. Popraw ustawienia!") == QMessageBox::Ok) {
             dsd = new DatabaseSelectDialog(true, this);
             connect(dsd, SIGNAL(accepted()), this, SLOT(retry()));

@@ -30,10 +30,8 @@ SOURCES += \
         databasemanager.cpp \
         databaseselectdialog.cpp \
         entriesmanager.cpp \
-        localdatabasemanager.cpp \
         main.cpp \
-        mainwindow.cpp \
-        remotedatabasemanager.cpp
+        mainwindow.cpp
 
 HEADERS += \
         addeditdevicedialog.h \
@@ -41,9 +39,7 @@ HEADERS += \
         databasemanager.h \
         databaseselectdialog.h \
         entriesmanager.h \
-        localdatabasemanager.h \
-        mainwindow.h \
-        remotedatabasemanager.h
+        mainwindow.h
 
 FORMS += \
         addeditdevicedialog.ui \
