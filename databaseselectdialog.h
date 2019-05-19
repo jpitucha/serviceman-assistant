@@ -13,14 +13,10 @@ class DatabaseSelectDialog : public QDialog
 
 public:
     explicit DatabaseSelectDialog(bool onStartup = false, QWidget *parent = nullptr);
-    char getSelected();
-    QString getLocal();
-    QString getRemote();
+    QString getPath();
     ~DatabaseSelectDialog();
 
 public slots:
-    void selectLocalDatabase();
-    void selectRemoteDatabase();
     void reject();
 
 private slots:
@@ -29,7 +25,6 @@ private slots:
 private:
     Ui::DatabaseSelectDialog *ui;
     bool onStartup;
-    void clearInputs();
 };
 
 #endif // DATABASESELECTDIALOG_H

@@ -86,7 +86,7 @@ void MainWindow::loadData() {
 }
 
 void MainWindow::retry() {
-    DatabaseManager::getInstance()->saveSettings(dsd->getLocal());
+    DatabaseManager::getInstance()->saveSettings(dsd->getPath());
     dsd->deleteLater();
     start();
 }
