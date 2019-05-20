@@ -44,8 +44,8 @@ bool DatabaseManager::connect(QString path) {
     return db.isOpen();
 }
 
-QStringList DatabaseManager::getAll(QString table) {
-    q->exec("SELECT * FROM " + table + ";");
+QStringList DatabaseManager::getAll(QString table, QString column) {
+    if (column.isEmpty()) q->exec("SELECT * FROM " + table + ";"); else q->exec("SELECT " + column + " FROM " + table + ";");
     int i = 0;
     tmp = new QStringList();
     while (q->next()) {

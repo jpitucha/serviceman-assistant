@@ -28,6 +28,7 @@ private slots:
     void openDevicesDialog();
     void openDamagesDialog();
     void openTechniciansDialog();
+    void openDatabaseSettings();
     void openAddDeviceDialog();
     void openEditDeviceDialog();
     void deleteDevice();

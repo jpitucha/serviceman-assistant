@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionModels, SIGNAL(triggered()), this, SLOT(openDevicesDialog()));
     connect(ui->actionDamages, SIGNAL(triggered()), this, SLOT(openDamagesDialog()));
     connect(ui->actionTechnicians, SIGNAL(triggered()), this, SLOT(openTechniciansDialog()));
+    connect(ui->actionDatabaseSettings, SIGNAL(triggered()), this, SLOT(openDatabaseSettings()));
     connect(ui->actionAdd, SIGNAL(triggered()), this, SLOT(openAddDeviceDialog()));
     connect(ui->actionEdit, SIGNAL(triggered()), this, SLOT(openEditDeviceDialog()));
     connect(ui->actionDelete, SIGNAL(triggered()), this, SLOT(deleteDevice()));
@@ -59,29 +60,33 @@ void MainWindow::loadData() {
 }
 
 void MainWindow::retry() {
-    DatabaseManager::getInstance()->saveSettings(dsd->getPath());
     dsd->deleteLater();
     start();
 }
 
 void MainWindow::openClientsDialog() {
-//    EntriesManager *em = new EntriesManager("Klienci", clientsList, this);
-//    em->open();
+    EntriesManager *em = new EntriesManager("Klienci", DatabaseManager::getInstance()->getAll("clients", "client"), this);
+    em->open();
 }
 
 void MainWindow::openDevicesDialog() {
-//    EntriesManager *em = new EntriesManager("Modele", modelsList, this);
-//    em->open();
+    EntriesManager *em = new EntriesManager("Modele", DatabaseManager::getInstance()->getAll("models", "model"), this);
+    em->open();
 }
 
 void MainWindow::openDamagesDialog() {
-//    EntriesManager *em = new EntriesManager("Usterki", damagesList, this);
-//    em->open();
+    EntriesManager *em = new EntriesManager("Usterki", DatabaseManager::getInstance()->getAll("damages"), this);
+    em->open();
 }
 
 void MainWindow::openTechniciansDialog() {
-//    EntriesManager *em = new EntriesManager("Serwisanci", techniciansList, this);
-//    em->open();
+    EntriesManager *em = new EntriesManager("Serwisanci", DatabaseManager::getInstance()->getAll("technicians"), this);
+    em->open();
+}
+
+void MainWindow::openDatabaseSettings() {
+    dsd = new DatabaseSelectDialog(false, this);
+    dsd->open();
 }
 
 void MainWindow::openAddDeviceDialog() {

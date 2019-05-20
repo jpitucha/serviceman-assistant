@@ -3,6 +3,7 @@
 
 #include <QFileDialog>
 #include <QMessageBox>
+#include "databasemanager.h"
 
 DatabaseSelectDialog::DatabaseSelectDialog(bool onStartup, QWidget *parent) : QDialog(parent),
     ui(new Ui::DatabaseSelectDialog) {
@@ -27,6 +28,15 @@ void DatabaseSelectDialog::reject() {
         if (QMessageBox::question(this, "Uwaga", "To spowoduje zamknięcie aplikacji. Kontynuować?") == QMessageBox::Yes) {
             QApplication::quit();
         }
+    } else QDialog::reject();
+}
+
+void DatabaseSelectDialog::accept() {
+    if (getPath().isEmpty()) {
+        QMessageBox::warning(this, "Uwaga", "To pole nie może być puste");
+    } else {
+        DatabaseManager::getInstance()->saveSettings(getPath());
+        QDialog::accept();
     }
 }
 

@@ -12,12 +12,13 @@ class DatabaseSelectDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit DatabaseSelectDialog(bool onStartup = false, QWidget *parent = nullptr);
+    explicit DatabaseSelectDialog(bool onStartup, QWidget *parent = nullptr);
     QString getPath();
     ~DatabaseSelectDialog();
 
 public slots:
     void reject();
+    void accept();
 
 private slots:
     void on_localBrowseBtn_clicked();

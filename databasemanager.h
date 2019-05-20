@@ -12,7 +12,7 @@ public:
     static DatabaseManager *getInstance();
     int init();
     void saveSettings(QString settings);
-    QStringList getAll(QString table);
+    QStringList getAll(QString table, QString column = "");
     void addRecord(QString table, QStringList data);
     void editRecord(QString table, int id, QStringList data);
     void deleteRecord(QString table, int id);
