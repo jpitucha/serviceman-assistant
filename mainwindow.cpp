@@ -65,23 +65,23 @@ void MainWindow::retry() {
 }
 
 void MainWindow::openClientsDialog() {
-    EntriesManager *em = new EntriesManager("Klienci", DatabaseManager::getInstance()->getAll("clients", "client"), this);
+    EntriesManager *em = new EntriesManager("Klienci", "clients", "client", this);
     em->open();
 }
 
 void MainWindow::openDevicesDialog() {
-    EntriesManager *em = new EntriesManager("Modele", DatabaseManager::getInstance()->getAll("models", "model"), this);
-    em->open();
+//    EntriesManager *em = new EntriesManager("Modele", DatabaseManager::getInstance()->getAll("models", "model"), this);
+//    em->open();
 }
 
 void MainWindow::openDamagesDialog() {
-    EntriesManager *em = new EntriesManager("Usterki", DatabaseManager::getInstance()->getAll("damages"), this);
-    em->open();
+//    EntriesManager *em = new EntriesManager("Usterki", DatabaseManager::getInstance()->getAll("damages"), this);
+//    em->open();
 }
 
 void MainWindow::openTechniciansDialog() {
-    EntriesManager *em = new EntriesManager("Serwisanci", DatabaseManager::getInstance()->getAll("technicians"), this);
-    em->open();
+//    EntriesManager *em = new EntriesManager("Serwisanci", DatabaseManager::getInstance()->getAll("technicians"), this);
+//    em->open();
 }
 
 void MainWindow::openDatabaseSettings() {

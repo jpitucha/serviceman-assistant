@@ -13,7 +13,9 @@ class EntriesManager : public QDialog
     Q_OBJECT
 
 public:
-    explicit EntriesManager(QString windowTitle, QStringList entries, QWidget *parent = nullptr);
+    explicit EntriesManager(QString windowTitle, QString table, QString column, QWidget *parent = nullptr);
+    QString table;
+    QString column;
     QStringList data;
     ~EntriesManager();
 

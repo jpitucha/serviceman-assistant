@@ -63,18 +63,17 @@ QStringList DatabaseManager::getAll(QString table, QString column) {
 }
 
 void DatabaseManager::addRecord(QString table, QStringList data) {
-    //args2 -> values
     QString *args = new QString();
     for (int i = 0; i < data.size(); i++) {
         if (i < data.size() - 1) args->append(data.at(i).split('=').at(0) + ", "); else args->append(data.at(i).split('=').at(0));
     }
-    QString *args2 = new QString();
+    QString *values = new QString();
     for (int i = 0; i < data.size(); i++) {
-        if (i < data.size() - 1) args2->append("'" + data.at(i).split('=').at(1) + "', "); else args2->append("'" + data.at(i).split('=').at(1) + "'");
+        if (i < data.size() - 1) values->append("'" + data.at(i).split('=').at(1) + "', "); else values->append("'" + data.at(i).split('=').at(1) + "'");
     }
-    q->exec("INSERT INTO " + table + " (" + *args + ") VALUES (" + *args2 + ");");
+    q->exec("INSERT INTO " + table + " (" + *args + ") VALUES (" + *values + ");");
     delete args;
-    delete args2;
+    delete values;
 }
 
 void DatabaseManager::editRecord(QString table, int id, QStringList data) {

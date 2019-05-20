@@ -2,23 +2,21 @@
 #include "ui_entriesmanager.h"
 #include "addedititemdialog.h"
 #include <QMessageBox>
+#include "databasemanager.h"
 
-EntriesManager::EntriesManager(QString windowTitle, QStringList entries, QWidget *parent) :
+EntriesManager::EntriesManager(QString windowTitle, QString table, QString column, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::EntriesManager)
 {
     ui->setupUi(this);
     setWindowTitle(windowTitle);
-    data = entries;
+    this->table = table;
+    this->column = column;
+    this->data = DatabaseManager::getInstance()->getAll(table, column); //when adding new record to check if it isn't copied
     model = new QStringListModel(this);
     model->setStringList(data);
     ui->listView->setModel(model);
     ui->listView->setCurrentIndex(model->index(0));
-}
-
-EntriesManager::~EntriesManager()
-{
-    delete ui;
 }
 
 void EntriesManager::on_addButton_clicked()
@@ -63,8 +61,8 @@ void EntriesManager::on_deleteButton_clicked()
     QModelIndex *tmpIndex = new QModelIndex(ui->listView->currentIndex());
     if (model->rowCount() > 0) {
         if (QMessageBox::warning(this, "Ostrzeżenie", "Na pewno?", QMessageBox::No, QMessageBox::Yes) == QMessageBox::Yes) {
-            data.removeAt(ui->listView->currentIndex().row());
-            model->setStringList(data);
+            model->removeRow(tmpIndex->row());
+            DatabaseManager::getInstance()->deleteRecord(table, tmpIndex->row() + 1);
             if (model->rowCount() > 0) {
                 if (model->rowCount() - 1 >= tmpIndex->row()) {
                     ui->listView->setCurrentIndex(*tmpIndex);
@@ -76,4 +74,9 @@ void EntriesManager::on_deleteButton_clicked()
     } else {
         QMessageBox::critical(this, "Błąd", "Nic już tu nie ma!");
     }
+}
+
+EntriesManager::~EntriesManager()
+{
+    delete ui;
 }
