@@ -16,6 +16,7 @@ public:
     void addRecord(QString table, QStringList data);
     void editRecord(QString table, int id, QStringList data);
     void deleteRecord(QString table, int id);
+    QString getLastID(QString table);
 
 private:
     explicit DatabaseManager(QObject *parent = nullptr);

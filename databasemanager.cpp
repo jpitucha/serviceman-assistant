@@ -1,6 +1,7 @@
 #include "databasemanager.h"
 #include <QDir>
 #include <QFile>
+#include <QDebug>
 
 DatabaseManager * DatabaseManager::instance = nullptr;
 
@@ -45,20 +46,25 @@ bool DatabaseManager::connect(QString path) {
 }
 
 QStringList DatabaseManager::getAll(QString table, QString column) {
-    if (column.isEmpty()) q->exec("SELECT * FROM " + table + ";"); else q->exec("SELECT " + column + " FROM " + table + ";");
+    if (column.isEmpty()) q->exec("SELECT rowid, " + column + " FROM " + table + ";"); else q->exec("SELECT rowid, " + column + " FROM " + table + ";");
     int i = 0;
+    QString *record = new QString();
     tmp = new QStringList();
     while (q->next()) {
         i = 0;
+        record = new QString();
         while (true) {
             if (q->value(i).isValid()) {
-                tmp->append(q->value(i).toString());
+                record->append(q->value(i).toString() + ";");
                 i++;
             } else {
                 break;
             }
         }
+        *record = record->left(record->length() - 1);
+        tmp->append(*record);
     }
+    delete record;
     return *tmp;
 }
 
@@ -79,12 +85,20 @@ void DatabaseManager::addRecord(QString table, QStringList data) {
 void DatabaseManager::editRecord(QString table, int id, QStringList data) {
     QString *args = new QString();
     for (int i = 0; i < data.size(); i++) {
-        if (i < data.size() - 1) args->append(data.at(i).split('=').at(0) + "='" + data.at(i).split('=').at(1) + "', "); else args->append(data.at(i).split('=').at(0) + "='" + data.at(i).split('=').at(1) + "'");
+        if (i < data.size() - 1) args->append(data.at(i).split('=').at(0) + " = '" + data.at(i).split('=').at(1) + "', "); else args->append(data.at(i).split('=').at(0) + " = '" + data.at(i).split('=').at(1) + "'");
     }
+    qDebug() << "UPDATE " + table + " SET " + *args + " WHERE rowid = " + QString::number(id) + ";";
     q->exec("UPDATE " + table + " SET " + *args + " WHERE rowid = " + QString::number(id) + ";");
     delete args;
 }
 
 void DatabaseManager::deleteRecord(QString table, int id) {
     q->exec("DELETE FROM " + table + " WHERE rowid = " + QString::number(id) + ";");
+}
+
+QString DatabaseManager::getLastID(QString table) {
+    q->exec("SELECT rowid FROM " + table + " ORDER BY rowid DESC LIMIT 1;");
+    q->next();
+    qDebug() << q->value(0).toString();
+    return q->value(0).toString();
 }

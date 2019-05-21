@@ -16,7 +16,8 @@ public:
     explicit EntriesManager(QString windowTitle, QString table, QString column, QWidget *parent = nullptr);
     QString table;
     QString column;
-    QStringList data;
+    QList<QMap<QString, QString>> data;
+    bool recordExists(QString record);
     ~EntriesManager();
 
 private slots:
