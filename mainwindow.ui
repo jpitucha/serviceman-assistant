@@ -40,7 +40,7 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QListView" name="listView">
+       <widget class="QListView" name="deviceListView">
         <property name="maximumSize">
          <size>
           <width>275</width>
@@ -50,7 +50,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QTableView" name="tableView">
+       <widget class="QTableView" name="repairsTableView">
         <property name="minimumSize">
          <size>
           <width>0</width>

@@ -3,7 +3,6 @@
 #include "addedititemdialog.h"
 #include <QMessageBox>
 #include "databasemanager.h"
-#include <QDebug>
 
 EntriesManager::EntriesManager(QString windowTitle, QString table, QString column, QWidget *parent) :
     QDialog(parent),

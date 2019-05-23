@@ -46,7 +46,7 @@ bool DatabaseManager::connect(QString path) {
 }
 
 QStringList DatabaseManager::getAll(QString table, QString column) {
-    if (column.isEmpty()) q->exec("SELECT rowid, " + column + " FROM " + table + ";"); else q->exec("SELECT rowid, " + column + " FROM " + table + ";");
+    if (column.isEmpty()) q->exec("SELECT rowid FROM " + table + ";"); else q->exec("SELECT rowid, " + column + " FROM " + table + ";");
     int i = 0;
     QString *record = new QString();
     tmp = new QStringList();

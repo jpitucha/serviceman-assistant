@@ -7,9 +7,7 @@
 #include "databasemanager.h"
 #include <QDebug>
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     connect(ui->actionClients, SIGNAL(triggered()), this, SLOT(openClientsDialog()));
@@ -20,6 +18,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionAdd, SIGNAL(triggered()), this, SLOT(openAddDeviceDialog()));
     connect(ui->actionEdit, SIGNAL(triggered()), this, SLOT(openEditDeviceDialog()));
     connect(ui->actionDelete, SIGNAL(triggered()), this, SLOT(deleteDevice()));
+
+    devicesModel = new QStringListModel(this);
 }
 
 void MainWindow::start() {
@@ -57,6 +57,29 @@ void MainWindow::start() {
 }
 
 void MainWindow::loadData() {
+    QStringList *tempSL = new QStringList(DatabaseManager::getInstance()->getAll("devices", "sn, client, model"));
+    if (tempSL->size() > 0) {
+        QMap<QString, QString> *tempM = new QMap<QString, QString>();
+        for (int i = 0; i < tempSL->size(); i++) {
+            tempM->clear();
+            tempM->insert("id", tempSL->at(i).split(";").at(0));
+            tempM->insert("sn", tempSL->at(i).split(";").at(1));
+            tempM->insert("client", tempSL->at(i).split(";").at(2));
+            tempM->insert("model", tempSL->at(i).split(";").at(3));
+            devices.append(*tempM);
+        }
+        delete tempM;
+        tempSL->clear();
+        for (int i = 0; i < devices.size(); i++) {
+            tempSL->append(devices.at(i).value("sn") + " (" + devices.at(i).value("client") + ", " + devices.at(i).value("model") + ")");
+        }
+        devicesModel->setStringList(*tempSL);
+        delete tempSL;
+        ui->deviceListView->setCurrentIndex(devicesModel->index(0));
+    } else {
+        //disable edit and delete buttons
+    }
+    ui->deviceListView->setModel(devicesModel);
 }
 
 void MainWindow::retry() {
@@ -70,18 +93,18 @@ void MainWindow::openClientsDialog() {
 }
 
 void MainWindow::openDevicesDialog() {
-//    EntriesManager *em = new EntriesManager("Modele", DatabaseManager::getInstance()->getAll("models", "model"), this);
-//    em->open();
+    EntriesManager *em = new EntriesManager("Modele", "models", "model", this);
+    em->open();
 }
 
 void MainWindow::openDamagesDialog() {
-//    EntriesManager *em = new EntriesManager("Usterki", DatabaseManager::getInstance()->getAll("damages"), this);
-//    em->open();
+    EntriesManager *em = new EntriesManager("Usterki", "damages", "damage", this);
+    em->open();
 }
 
 void MainWindow::openTechniciansDialog() {
-//    EntriesManager *em = new EntriesManager("Serwisanci", DatabaseManager::getInstance()->getAll("technicians"), this);
-//    em->open();
+    EntriesManager *em = new EntriesManager("Serwisanci", "technicians", "technician", this);
+    em->open();
 }
 
 void MainWindow::openDatabaseSettings() {
@@ -90,10 +113,10 @@ void MainWindow::openDatabaseSettings() {
 }
 
 void MainWindow::openAddDeviceDialog() {
-//    AddEditDeviceDialog *dialog = new AddEditDeviceDialog("Dodaj", clientsList, modelsList, this);
+//    AddEditDeviceDialog *dialog = new AddEditDeviceDialog("Dodaj", DatabaseManager::getInstance()->getAll("clients", "client"), DatabaseManager::getInstance()->getAll("models", "model"), this);
 //    if (dialog->exec() == QDialog::Accepted) {
 //        if (dialog->getData().split(';')[0] != "") {
-//            if (!checkIfDeviceListContainsSN()) { // devicelist SN PART !!!
+//            if (!devicesModel.stringList().contains(dialog->getData().split(';').at(0))) {
 //                devicesList.append(dialog->getData());
 //                QList<QStandardItem*> tmpList;
 //                tmpList.append(new QStandardItem(dialog->getData().split(';')[0]));

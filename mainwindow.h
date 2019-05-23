@@ -18,6 +18,8 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     void start();
     DatabaseSelectDialog *dsd;
+    QStringListModel *devicesModel;
+    QList<QMap<QString, QString>> devices;
     ~MainWindow();
 
 public slots:
