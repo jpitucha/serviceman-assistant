@@ -77,7 +77,8 @@ void MainWindow::loadData() {
         delete tempSL;
         ui->deviceListView->setCurrentIndex(devicesModel->index(0));
     } else {
-        //disable edit and delete buttons
+        ui->actionEdit->setEnabled(false);
+        ui->actionDelete->setEnabled(false);
     }
     ui->deviceListView->setModel(devicesModel);
 }
@@ -113,23 +114,55 @@ void MainWindow::openDatabaseSettings() {
 }
 
 void MainWindow::openAddDeviceDialog() {
-//    AddEditDeviceDialog *dialog = new AddEditDeviceDialog("Dodaj", DatabaseManager::getInstance()->getAll("clients", "client"), DatabaseManager::getInstance()->getAll("models", "model"), this);
-//    if (dialog->exec() == QDialog::Accepted) {
-//        if (dialog->getData().split(';')[0] != "") {
-//            if (!devicesModel.stringList().contains(dialog->getData().split(';').at(0))) {
-//                devicesList.append(dialog->getData());
-//                QList<QStandardItem*> tmpList;
-//                tmpList.append(new QStandardItem(dialog->getData().split(';')[0]));
-//                tmpList.append(new QStandardItem(dialog->getData().split(';')[1]));
-//                tmpList.append(new QStandardItem(dialog->getData().split(';')[2]));
-//                model->appendRow(tmpList);
-//            } else {
-//                QMessageBox::critical(this, "Błąd", "Taki wpis już istnieje");
-//            }
-//        } else {
-//            QMessageBox::critical(this, "Błąd", "To pole nie może być puste");
-//        }
-//    }
+    QStringList *tempC = new QStringList(DatabaseManager::getInstance()->getAll("clients", "client"));
+    QStringList *tempM = new QStringList(DatabaseManager::getInstance()->getAll("models", "model"));
+    QStringList *dbClients = new QStringList();
+    QStringList *dbModels = new QStringList();
+
+    for (int i = 0; i < tempC->size(); i++) {
+        dbClients->append(tempC->at(i).split(';').at(1));
+    }
+
+    for (int i = 0; i < tempM->size(); i++) {
+        dbModels->append(tempM->at(i).split(';').at(1));
+    }
+
+    delete tempC;
+    delete tempM;
+
+    AddEditDeviceDialog *dialog = new AddEditDeviceDialog("Dodaj", *dbClients, *dbModels, this);
+    if (dialog->exec() == QDialog::Accepted) {
+        if (dialog->getData().split(';')[0] != "") {
+            if (!recordExists(dialog->getData().split(';').at(0))) {
+
+                devicesModel->insertRow(devices.size());
+                devicesModel->setData(devicesModel->index(devices.size()), dialog->getData().split(';').at(0) + " (" + dialog->getData().split(';').at(2) + ", " + dialog->getData().split(';').at(1) + ")");
+
+                QStringList *args = new QStringList();
+                args->append("sn=" + dialog->getData().split(';').at(0));
+                args->append("client=" + dialog->getData().split(';').at(1));
+                args->append("model=" + dialog->getData().split(';').at(2));
+                DatabaseManager::getInstance()->addRecord("devices", *args);
+                delete args;
+
+                QMap<QString, QString> *tempM = new QMap<QString, QString>();
+                tempM->insert("id", DatabaseManager::getInstance()->getLastID("devices"));
+                tempM->insert("sn", dialog->getData().split(';').at(0));
+                tempM->insert("client", dialog->getData().split(';').at(1));
+                tempM->insert("model", dialog->getData().split(';').at(2));
+                devices.append(*tempM);
+                delete tempM;
+
+                ui->deviceListView->setCurrentIndex(devicesModel->index(devicesModel->rowCount() - 1));
+                ui->actionEdit->setEnabled(true);
+                ui->actionEdit->setEnabled(true);
+            } else {
+                QMessageBox::critical(this, "Błąd", "Taki wpis już istnieje");
+            }
+        } else {
+            QMessageBox::critical(this, "Błąd", "To pole nie może być puste");
+        }
+    }
 }
 
 void MainWindow::openEditDeviceDialog() {
@@ -162,6 +195,13 @@ void MainWindow::deleteDevice() {
 //    } else {
 //        QMessageBox::critical(this, "Błąd", "Nic już tu nie ma!");
 //    }
+}
+
+bool MainWindow::recordExists(QString record) {
+    for (int i = 0; i < devices.size(); i++) {
+        if (devices.at(i).value("sn") == record) return true;
+    }
+    return false;
 }
 
 MainWindow::~MainWindow()

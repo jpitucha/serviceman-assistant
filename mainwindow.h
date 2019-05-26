@@ -20,6 +20,7 @@ public:
     DatabaseSelectDialog *dsd;
     QStringListModel *devicesModel;
     QList<QMap<QString, QString>> devices;
+    bool recordExists(QString record);
     ~MainWindow();
 
 public slots:
